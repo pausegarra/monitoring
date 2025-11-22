@@ -1,0 +1,39 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'russian-cheatsheet'
+    metrics_path: '/api/q/metrics'
+    static_configs:
+      - targets: ['host.docker.internal:8001']
+
+  - job_name: 'keycloak'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['host.docker.internal:8098']
+
+  - job_name: 'festesdexert-metrics'
+    static_configs:
+      - targets: ['host.docker.internal:9115']
+
+  - job_name: 'http-healthchecks'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - https://russian-cheatsheet.pausegarra.es/api/q/health/live
+          - https://auth.pausegarra.es/health/live
+          - https://yotanteo.com
+          - https://pausegarra.es
+          - https://sendif.pausegarra.es
+          - https://latticeaxis.com
+          - https://crossfitlambda.es
+          - https://festesdexert.es
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
