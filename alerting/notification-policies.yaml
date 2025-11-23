@@ -3,3 +3,32 @@ apiVersion: 1
 policy:
   receiver: grafana-default-email
   group_by: ["grafana_folder", "alertname"]
+
+  routes:
+    - receiver: Email me
+      object_matchers:
+        - [ "alertname", "=", "CPU Usage High" ]
+
+    - receiver: Email Lambda
+      object_matchers:
+        - [ "alertname", "=", "CrossFit Lambda Down" ]
+
+    - receiver: Email Lattice
+      object_matchers:
+        - [ "alertname", "=", "LatticeAxis Down" ]
+
+    - receiver: Email me
+      object_matchers:
+        - [ "alertname", "=", "Sendif Down" ]
+
+    - receiver: Email me
+      object_matchers:
+        - [ "alertname", "=", "Russian Cheat Sheet Down" ]
+
+    - receiver: Email me
+      object_matchers:
+        - [ "alertname", "=", "Yotanteo Down" ]
+
+    - receiver: Email me
+      object_matchers:
+        - [ "alertname", "=", "Festes de Xert Down" ]
