@@ -102,7 +102,9 @@ jobs:
           chmod 600 id_rsa
           cat ./compose.yaml | ssh -o StrictHostKeyChecking=no -i id_rsa -p ${{ secrets.SSH_PORT }} \
             ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} \
-            "docker pull ghcr.io/pausegarra/auth:${{ github.ref_name }} && \
+            "docker pull ghcr.io/pausegarra/grafana:${{ github.ref_name }} && \
+             docker pull ghcr.io/pausegarra/blackbox-exporter:${{ github.ref_name }} && \
+             docker pull ghcr.io/pausegarra/prometheus:${{ github.ref_name }} && \
               export VERSION=${{ github.ref_name }} && \
               export EMAIL_USERNAME=${{ secrets.EMAIL_USERNAME }} && \
               export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }} && \
