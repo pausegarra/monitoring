@@ -9,3 +9,12 @@ remove-grafana: ## Remove the grafana image
 
 run-grafana: build-grafana remove-grafana ## Run the grafana image
 	docker run -d -p 3000:3000 --name grafana-local ghcr.io/pausegarra/grafana
+
+build-prometheus: ## Build the prometheus image
+	docker build -t ghcr.io/pausegarra/prometheus -f Dockerfile.prometheus .
+
+remove-prometheus: ## Remove the prometheus image
+	docker rm -f prometheus-local
+
+run-prometheus: build-prometheus remove-prometheus ## Run the prometheus image
+	docker run -d -p 9090:9090 --name prometheus-local ghcr.io/pausegarra/prometheus
