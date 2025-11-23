@@ -1,0 +1,5 @@
+apiVersion: 1
+
+policy:
+  receiver: grafana-default-email
+  group_by: ["grafana_folder", "alertname"]

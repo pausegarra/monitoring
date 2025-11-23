@@ -1,0 +1,6 @@
+FROM grafana/grafana:latest
+
+COPY ./dashboards /etc/grafana/provisioning/dashboards
+COPY ./datasources /etc/grafana/provisioning/datasources
+COPY ./alerting /etc/grafana/provisioning/alerting
+COPY ./config/grafana.ini /etc/grafana/grafana.ini
