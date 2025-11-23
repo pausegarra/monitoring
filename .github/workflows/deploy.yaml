@@ -54,7 +54,7 @@ jobs:
 
       - name: 🛠️ Build Docker Image
         run: |
-          docker build -t ghcr.io/pausegarra/prometheus:${{ github.ref_name }} -f Dockerfile.grafana .
+          docker build -t ghcr.io/pausegarra/prometheus:${{ github.ref_name }} -f Dockerfile.prometheus .
 
       - name: 🛠️ Push Docker Image to Registry
         run: |
@@ -81,7 +81,7 @@ jobs:
 
       - name: 🛠️ Build Docker Image
         run: |
-          docker build -t ghcr.io/pausegarra/blackbox-exporter:${{ github.ref_name }} -f Dockerfile.grafana .
+          docker build -t ghcr.io/pausegarra/blackbox-exporter:${{ github.ref_name }} -f Dockerfile.blackbox .
 
       - name: 🛠️ Push Docker Image to Registry
         run: |
