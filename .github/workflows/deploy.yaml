@@ -108,5 +108,7 @@ jobs:
               export VERSION=${{ github.ref_name }} && \
               export EMAIL_USERNAME=${{ secrets.EMAIL_USERNAME }} && \
               export EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }} && \
+              export KEYCLOAK_CLIENT_ID=${{ secrets.KEYCLOAK_CLIENT_ID }} && \
+              export KEYCLOAK_CLIENT_SECRET=${{ secrets.KEYCLOAK_CLIENT_SECRET }} && \
             docker compose -f - up -d --force-recreate"
           rm id_rsa
