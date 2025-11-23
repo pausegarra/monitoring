@@ -20,7 +20,7 @@ services:
     depends_on:
       - prometheus
     environment:
-      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
 
   blackbox-exporter:
