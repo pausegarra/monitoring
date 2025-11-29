@@ -93,7 +93,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
+        "w": 9,
         "x": 0,
         "y": 1
       },
@@ -125,7 +125,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "process_uptime_seconds{job=\"$job\"}",
+          "expr": "process_uptime_seconds{job=\"$app\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -178,8 +178,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 6,
+        "w": 8,
+        "x": 9,
         "y": 1
       },
       "id": 92,
@@ -209,7 +209,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_start_time_seconds{job=\"$job\"}*1000",
+          "expr": "process_start_time_seconds{job=\"$app\"}*1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -220,6 +220,151 @@
         }
       ],
       "title": "Start time",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 7,
+        "x": 17,
+        "y": 1
+      },
+      "id": 165,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "probe_success{instance=\"https://auth.pausegarra.es/health/live\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Status",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 9,
+        "x": 0,
+        "y": 4
+      },
+      "id": 164,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (name) (container_memory_max_usage_bytes{name=\"$app\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory Usage Max Peak",
       "type": "stat"
     },
     {
@@ -266,9 +411,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 12,
-        "y": 1
+        "w": 8,
+        "x": 9,
+        "y": 4
       },
       "id": 65,
       "maxDataPoints": 100,
@@ -297,7 +442,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "sum(jvm_memory_used_bytes{job=\"$job\", area=\"heap\"})",
+          "expr": "sum(jvm_memory_used_bytes{job=\"$app\", area=\"heap\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -363,9 +508,9 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 18,
-        "y": 1
+        "w": 7,
+        "x": 17,
+        "y": 4
       },
       "id": 75,
       "maxDataPoints": 100,
@@ -394,7 +539,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "sum(jvm_memory_used_bytes{job=\"$job\", area=\"nonheap\"})",
+          "expr": "sum(jvm_memory_used_bytes{job=\"$app\", area=\"nonheap\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -412,7 +557,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 126,
       "panels": [],
@@ -486,7 +631,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 5
+        "y": 8
       },
       "id": 111,
       "options": {
@@ -514,7 +659,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(http_server_requests_seconds_count{job=\"$job\"}[2m]))",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"$app\"}[2m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -596,7 +741,7 @@
         "h": 7,
         "w": 9,
         "x": 9,
-        "y": 5
+        "y": 8
       },
       "id": 113,
       "options": {
@@ -624,7 +769,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"$job\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"$job\"}[2m]))",
+          "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"$app\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"$app\"}[2m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -643,7 +788,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"$job\"})",
+          "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"$app\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -757,7 +902,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 5
+        "y": 8
       },
       "id": 112,
       "options": {
@@ -785,7 +930,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_count{job=\"$job\", status=~\"5..\"}[1m])",
+          "expr": "rate(http_server_requests_seconds_count{job=\"$app\", status=~\"5..\"}[1m])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -806,7 +951,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 15
       },
       "id": 127,
       "panels": [],
@@ -880,7 +1025,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 13
+        "y": 16
       },
       "id": 24,
       "options": {
@@ -909,7 +1054,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(jvm_memory_used_bytes{area=\"heap\", job=\"$job\"})",
+          "expr": "sum(jvm_memory_used_bytes{area=\"heap\", job=\"$app\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -992,7 +1137,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 13
+        "y": 16
       },
       "id": 25,
       "options": {
@@ -1020,7 +1165,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "sum(jvm_memory_used_bytes{job=\"$job\", area=\"nonheap\"})",
+          "expr": "sum(jvm_memory_used_bytes{job=\"$app\", area=\"nonheap\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1101,7 +1246,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 13
+        "y": 16
       },
       "id": 26,
       "options": {
@@ -1129,7 +1274,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "sum(jvm_memory_used_bytes{job=\"$job\"})",
+          "expr": "sum(jvm_memory_used_bytes{job=\"$app\"})",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "used",
@@ -1137,9 +1282,35 @@
           "range": true,
           "refId": "A",
           "step": 2400
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "max by (name) (container_memory_usage_bytes{name=\"$app\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "container",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "max by (name) (container_spec_memory_limit_bytes{name=\"$app\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "limit",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "JVM Total",
+      "title": "Total",
       "type": "timeseries"
     },
     {
@@ -1148,7 +1319,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 23
       },
       "id": 128,
       "panels": [],
@@ -1222,9 +1393,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
+        "w": 8,
         "x": 0,
-        "y": 21
+        "y": 24
       },
       "id": 106,
       "options": {
@@ -1252,11 +1423,11 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "system_cpu_usage{job=\"$job\"}",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", name=\"$app\"}[1m])) by (name) *100",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "system",
+          "legendFormat": "container",
           "metric": "",
           "range": true,
           "refId": "A",
@@ -1268,7 +1439,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_cpu_usage{job=\"$job\"}",
+          "expr": "process_cpu_usage{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
@@ -1326,7 +1497,6 @@
           },
           "decimals": 1,
           "mappings": [],
-          "max": 8,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -1347,9 +1517,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
-        "x": 11,
-        "y": 21
+        "w": 8,
+        "x": 8,
+        "y": 24
       },
       "id": 93,
       "options": {
@@ -1377,17 +1547,124 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "system_load_average_1m{job=\"$job\"}",
+          "expr": "max by (name) (rate(container_cpu_usage_seconds_total{name=\"$app\", cpu=\"total\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "system-1m",
+          "legendFormat": "container",
           "metric": "",
           "range": true,
           "refId": "A",
           "step": 2400
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "max by (name) (container_spec_cpu_quota{name=\"$app\"}) / max by (name) (container_spec_cpu_period{name=\"$app\"})",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "limit",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 24
+      },
+      "id": 166,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (name) (rate(container_cpu_cfs_throttled_periods_total{name=\"$app\"}[1m]))\n/\nmax by (name) (rate(container_cpu_cfs_periods_total{name=\"$app\"}[1m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Throttling",
       "type": "timeseries"
     },
     {
@@ -1547,7 +1824,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 28
+        "y": 31
       },
       "id": 124,
       "options": {
@@ -1575,7 +1852,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_states_threads{job=\"$job\"}",
+          "expr": "jvm_threads_states_threads{job=\"$app\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1655,7 +1932,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 28
+        "y": 31
       },
       "id": 32,
       "options": {
@@ -1683,7 +1960,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_live_threads{job=\"$job\"}",
+          "expr": "jvm_threads_live_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "live",
@@ -1698,7 +1975,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_daemon_threads{job=\"$job\"}",
+          "expr": "jvm_threads_daemon_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "daemon",
@@ -1713,7 +1990,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_peak_threads{job=\"$job\"}",
+          "expr": "jvm_threads_peak_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "peak",
@@ -1727,7 +2004,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_threads{job=\"$job\"}",
+          "expr": "process_threads{job=\"$app\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1809,7 +2086,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 28
+        "y": 31
       },
       "id": 61,
       "options": {
@@ -1837,7 +2114,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_files_open_files{job=\"$job\"}",
+          "expr": "process_files_open_files{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1853,7 +2130,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_files_max_files{job=\"$job\"}",
+          "expr": "process_files_max_files{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1873,7 +2150,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 38
       },
       "id": 129,
       "panels": [],
@@ -1948,7 +2225,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 39
       },
       "id": 3,
       "maxPerRow": 3,
@@ -1980,7 +2257,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "jvm_memory_used_bytes{job=~\"$job\", area=\"heap\"}",
+          "expr": "jvm_memory_used_bytes{job=~\"$app\", area=\"heap\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -2000,7 +2277,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_committed_bytes{job=\"$job\", area=\"heap\"}",
+          "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2017,7 +2294,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_max_bytes{job=\"$job\", area=\"heap\"}",
+          "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2038,7 +2315,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 130,
       "panels": [],
@@ -2112,7 +2389,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 44
+        "y": 47
       },
       "id": 78,
       "maxPerRow": 3,
@@ -2143,7 +2420,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_used_bytes{job=\"$job\", area=\"nonheap\"}",
+          "expr": "jvm_memory_used_bytes{job=\"$app\", area=\"nonheap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2160,7 +2437,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_committed_bytes{job=\"$job\", area=\"nonheap\"}",
+          "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"nonheap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2177,7 +2454,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_max_bytes{job=\"$job\", area=\"nonheap\"}",
+          "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"nonheap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2198,7 +2475,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 51
+        "y": 54
       },
       "id": 131,
       "panels": [],
@@ -2272,7 +2549,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 52
+        "y": 55
       },
       "id": 98,
       "options": {
@@ -2297,7 +2574,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(jvm_gc_pause_seconds_count{job=\"$job\"}[2m])",
+          "expr": "rate(jvm_gc_pause_seconds_count{job=\"$app\"}[2m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2377,7 +2654,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 52
+        "y": 55
       },
       "id": 101,
       "options": {
@@ -2402,7 +2679,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(jvm_gc_pause_seconds_sum{job=\"$job\"}[1m])/rate(jvm_gc_pause_seconds_count{job=\"$job\"}[1m])",
+          "expr": "rate(jvm_gc_pause_seconds_sum{job=\"$app\"}[1m])/rate(jvm_gc_pause_seconds_count{job=\"$app\"}[1m])",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -2416,7 +2693,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_gc_pause_seconds_max{job=\"$job\"}",
+          "expr": "jvm_gc_pause_seconds_max{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -2495,7 +2772,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 52
+        "y": 55
       },
       "id": 99,
       "options": {
@@ -2520,7 +2797,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(jvm_gc_memory_allocated_bytes_total{job=\"$job\", area=\"nonheap\"}[2m])",
+          "expr": "rate(jvm_gc_memory_allocated_bytes_total{job=\"$app\", area=\"nonheap\"}[2m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2534,7 +2811,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(jvm_gc_memory_promoted_bytes_total{job=\"$job\", area=\"nonheap\"}[2m])",
+          "expr": "rate(jvm_gc_memory_promoted_bytes_total{job=\"$app\", area=\"nonheap\"}[2m])",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -2552,7 +2829,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 62
       },
       "id": 132,
       "panels": [],
@@ -2626,7 +2903,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 63
       },
       "id": 37,
       "options": {
@@ -2651,7 +2928,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_classes_loaded_classes{job=\"$job\"}",
+          "expr": "jvm_classes_loaded_classes{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "loaded",
@@ -2730,7 +3007,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 63
       },
       "id": 38,
       "options": {
@@ -2755,7 +3032,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "delta(jvm_classes_loaded_classes{job=\"$job\"}[2m])",
+          "expr": "delta(jvm_classes_loaded_classes{job=\"$app\"}[2m])",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -2776,7 +3053,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 70
       },
       "id": 163,
       "panels": [],
@@ -2849,7 +3126,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 68
+        "y": 71
       },
       "id": 143,
       "options": {
@@ -2874,7 +3151,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_count{job=\"$job\", uri!~\"/health/.*\", uri!=\"/metrics\"}[1m])",
+          "expr": "rate(http_server_requests_seconds_count{job=\"$app\", uri!~\"/health/.*\", uri!=\"/metrics\"}[1m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -2950,7 +3227,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 68
+        "y": 71
       },
       "id": 155,
       "options": {
@@ -2975,7 +3252,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_sum{job=\"$job\", uri!~\"/health/.*\", uri!=\"/metrics\"}[4m]) / rate(http_server_requests_seconds_count{job=\"$job\", uri!~\"/health/.*\", uri!=\"/metrics\"}[4m])",
+          "expr": "rate(http_server_requests_seconds_sum{job=\"$app\", uri!~\"/health/.*\", uri!=\"/metrics\"}[4m]) / rate(http_server_requests_seconds_count{job=\"$app\", uri!~\"/health/.*\", uri!=\"/metrics\"}[4m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -3051,7 +3328,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 76
+        "y": 79
       },
       "id": 153,
       "options": {
@@ -3076,7 +3353,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "http_server_requests_seconds_max{job=\"$job\", uri!~\"/health/.*\", uri!=\"/metrics\"}",
+          "expr": "http_server_requests_seconds_max{job=\"$app\", uri!~\"/health/.*\", uri!=\"/metrics\"}",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -3152,7 +3429,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 76
+        "y": 79
       },
       "id": 151,
       "options": {
@@ -3177,7 +3454,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_sum{job=\"$job\", uri!~\"/health/.*\", uri!=\"/metrics\"}[2m])",
+          "expr": "rate(http_server_requests_seconds_sum{job=\"$app\", uri!~\"/health/.*\", uri!=\"/metrics\"}[2m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -3199,8 +3476,7 @@
           "text": "keycloak",
           "value": "keycloak"
         },
-        "description": "",
-        "name": "job",
+        "name": "app",
         "options": [
           {
             "selected": true,
@@ -3221,5 +3497,5 @@
   "timezone": "browser",
   "title": "Keycloak",
   "uid": "apmawgrlGk__",
-  "version": 1
+  "version": 2
 }
