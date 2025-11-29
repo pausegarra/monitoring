@@ -361,7 +361,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "container_memory_max_usage_bytes{name=\"$name\"}",
+          "expr": "container_memory_max_usage_bytes{name=\"$app\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -509,7 +509,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "container_memory_usage_bytes{name=\"$name\"}",
+          "expr": "container_memory_usage_bytes{name=\"$app\"}",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
