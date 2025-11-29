@@ -2,7 +2,7 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'russian-cheatsheet'
+  - job_name: 'russian-cheatsheet-api'
     metrics_path: '/api/q/metrics'
     static_configs:
       - targets: ['host.docker.internal:8001']

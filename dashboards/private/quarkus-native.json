@@ -12,7 +12,7 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "limit": 100,
-        "name": "Annotations \u0026 Alerts",
+        "name": "Annotations & Alerts",
         "showIn": 0,
         "type": "dashboard"
       },
@@ -23,7 +23,7 @@
           "uid": "feqjruau7xptsc"
         },
         "enable": false,
-        "expr": "resets(process_uptime_seconds{application=\"$application\", instance=\"$instance\"}[1m]) \u003e 0",
+        "expr": "resets(process_uptime_seconds{application=\"$application\", instance=\"$instance\"}[1m]) > 0",
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "name": "Restart Detection",
@@ -39,7 +39,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 9,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -78,7 +78,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -92,7 +93,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
+        "w": 8,
         "x": 0,
         "y": 1
       },
@@ -115,7 +116,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -124,7 +125,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "process_uptime_seconds{job=\"russian-cheatsheet\"}",
+          "expr": "process_uptime_seconds{job=\"$app\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -162,7 +163,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -176,8 +178,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 6,
+        "w": 8,
+        "x": 8,
         "y": 1
       },
       "id": 92,
@@ -199,7 +201,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -207,7 +209,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_start_time_seconds{job=\"russian-cheatsheet\"}*1000",
+          "expr": "process_start_time_seconds{job=\"$app\"}*1000",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -218,92 +220,6 @@
         }
       ],
       "title": "Start time",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "feqjruau7xptsc"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null",
-                "result": {
-                  "text": "N/A"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "rgba(50, 172, 45, 0.97)"
-              },
-              {
-                "color": "rgba(237, 129, 40, 0.89)",
-                "value": 70
-              },
-              {
-                "color": "rgba(245, 54, 54, 0.9)",
-                "value": 90
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 12,
-        "y": 1
-      },
-      "id": 65,
-      "maxDataPoints": 100,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "feqjruau7xptsc"
-          },
-          "editorMode": "code",
-          "expr": "sum(jvm_memory_used_bytes{job=\"russian-cheatsheet\", area=\"heap\"})",
-          "format": "time_series",
-          "intervalFactor": 2,
-          "legendFormat": "",
-          "range": true,
-          "refId": "A",
-          "step": 14400
-        }
-      ],
-      "title": "Memory used",
       "type": "stat"
     },
     {
@@ -337,7 +253,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -350,8 +267,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 6,
-        "x": 18,
+        "w": 8,
+        "x": 16,
         "y": 1
       },
       "id": 164,
@@ -375,7 +292,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "editorMode": "code",
@@ -389,12 +306,225 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 4
+      },
+      "id": 166,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "container_memory_max_usage_bytes{name=\"$name\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory Usage Max Peak",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": 0
+              },
+              {
+                "color": "purple",
+                "value": 70
+              },
+              {
+                "color": "rgba(245, 54, 54, 0.9)",
+                "value": 90
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 8,
+        "y": 4
+      },
+      "id": 65,
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "sum(jvm_memory_used_bytes{job=\"$app\", area=\"heap\"})",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "range": true,
+          "refId": "A",
+          "step": 14400
+        }
+      ],
+      "title": "Process memory used",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 4
+      },
+      "id": 165,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "container_memory_usage_bytes{name=\"$name\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory Usage",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 126,
       "panels": [],
@@ -435,6 +565,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -450,7 +581,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -466,7 +598,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 5
+        "y": 8
       },
       "id": 111,
       "options": {
@@ -485,7 +617,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -494,7 +626,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(rate(http_server_requests_seconds_count{job=\"russian-cheatsheet\"}[1m]))",
+          "expr": "sum(rate(http_server_requests_seconds_count{job=\"$app\"}[1m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -543,6 +675,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -558,7 +691,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -574,7 +708,7 @@
         "h": 7,
         "w": 9,
         "x": 9,
-        "y": 5
+        "y": 8
       },
       "id": 113,
       "options": {
@@ -593,7 +727,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -602,7 +736,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"russian-cheatsheet\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"russian-cheatsheet\"}[2m]))",
+          "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"$app\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"$app\"}[2m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -621,7 +755,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"russian-cheatsheet\"})",
+          "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"$app\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -671,6 +805,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -686,7 +821,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -733,7 +869,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 5
+        "y": 8
       },
       "id": 112,
       "options": {
@@ -752,7 +888,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -761,7 +897,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_count{job=\"russian-cheatsheet\", status=~\"5..\"}[1m])",
+          "expr": "rate(http_server_requests_seconds_count{job=\"$app\", status=~\"5..\"}[1m])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -782,7 +918,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 15
       },
       "id": 127,
       "panels": [],
@@ -823,6 +959,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -838,7 +975,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -854,7 +992,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 16
       },
       "id": 24,
       "options": {
@@ -874,7 +1012,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -883,17 +1021,43 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(jvm_memory_used_bytes{area=\"heap\", job=\"russian-cheatsheet\"})",
+          "expr": "sum(jvm_memory_used_bytes{area=\"heap\", job=\"$app\"})",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "intervalFactor": 2,
-          "legendFormat": "used",
+          "legendFormat": "process",
           "metric": "",
           "range": true,
           "refId": "A",
           "step": 2400,
           "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "container_memory_usage_bytes{name=\"$app-api\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "container",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "container_spec_memory_limit_bytes{name=\"$app-api\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "max",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Memory usage",
@@ -905,7 +1069,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 23
       },
       "id": 128,
       "panels": [],
@@ -946,6 +1110,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -963,7 +1128,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -979,7 +1145,7 @@
         "h": 7,
         "w": 11,
         "x": 0,
-        "y": 21
+        "y": 24
       },
       "id": 106,
       "options": {
@@ -999,7 +1165,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1007,15 +1173,13 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "system_cpu_usage{job=\"russian-cheatsheet\"}",
+          "expr": "process_cpu_usage{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "system",
-          "metric": "",
+          "legendFormat": "process",
           "range": true,
-          "refId": "A",
-          "step": 2400
+          "refId": "B"
         },
         {
           "datasource": {
@@ -1023,13 +1187,12 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_cpu_usage{job=\"russian-cheatsheet\"}",
-          "format": "time_series",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", name=\"$app-api\"}[1m])) by (name) *100",
           "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "process",
+          "instant": false,
+          "legendFormat": "container",
           "range": true,
-          "refId": "B"
+          "refId": "C"
         }
       ],
       "title": "CPU Usage",
@@ -1069,6 +1232,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1080,13 +1244,13 @@
           },
           "decimals": 1,
           "mappings": [],
-          "max": 8,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1102,7 +1266,7 @@
         "h": 7,
         "w": 13,
         "x": 11,
-        "y": 21
+        "y": 24
       },
       "id": 93,
       "options": {
@@ -1122,7 +1286,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1130,14 +1294,27 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "system_load_average_1m{job=\"russian-cheatsheet\"}",
+          "expr": "rate(container_cpu_usage_seconds_total{name=\"$app-api\", cpu=\"total\"}[1m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "system-1m",
+          "legendFormat": "container load",
           "metric": "",
           "range": true,
           "refId": "A",
           "step": 2400
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "container_spec_cpu_quota{name=\"$app-api\"} / container_spec_cpu_period{name=\"$app-api\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "max_allowed_cpu",
+          "range": true,
+          "refId": "B"
         }
       ],
       "title": "Load",
@@ -1177,6 +1354,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1191,7 +1369,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1298,7 +1477,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 28
+        "y": 31
       },
       "id": 124,
       "options": {
@@ -1318,7 +1497,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1326,7 +1505,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_states_threads{job=\"russian-cheatsheet\"}",
+          "expr": "jvm_threads_states_threads{job=\"$app\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1372,6 +1551,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1388,7 +1568,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1404,7 +1585,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 28
+        "y": 31
       },
       "id": 32,
       "options": {
@@ -1424,7 +1605,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1432,7 +1613,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_live_threads{job=\"russian-cheatsheet\"}",
+          "expr": "jvm_threads_live_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "live",
@@ -1447,7 +1628,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_daemon_threads{job=\"russian-cheatsheet\"}",
+          "expr": "jvm_threads_daemon_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "daemon",
@@ -1462,7 +1643,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_threads_peak_threads{job=\"russian-cheatsheet\"}",
+          "expr": "jvm_threads_peak_threads{job=\"$app\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "peak",
@@ -1476,7 +1657,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_threads{job=\"russian-cheatsheet\"}",
+          "expr": "process_threads{job=\"$app\"}",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -1524,6 +1705,7 @@
               "type": "log"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1540,7 +1722,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1556,7 +1739,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 28
+        "y": 31
       },
       "id": 61,
       "options": {
@@ -1576,7 +1759,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1584,7 +1767,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_files_open_files{job=\"russian-cheatsheet\"}",
+          "expr": "process_files_open_files{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1600,7 +1783,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "process_files_max_files{job=\"russian-cheatsheet\"}",
+          "expr": "process_files_max_files{job=\"$app\"}",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -1620,7 +1803,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 38
       },
       "id": 129,
       "panels": [],
@@ -1662,6 +1845,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1677,7 +1861,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1693,7 +1878,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 39
       },
       "id": 3,
       "maxPerRow": 3,
@@ -1714,7 +1899,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "repeat": "jvm_memory_pool_heap",
       "repeatDirection": "h",
       "targets": [
@@ -1725,7 +1910,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "jvm_memory_used_bytes{job=~\"russian-cheatsheet\", area=\"heap\"}",
+          "expr": "jvm_memory_used_bytes{job=~\"$app\", area=\"heap\"}",
           "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
@@ -1745,7 +1930,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_committed_bytes{job=\"russian-cheatsheet\", area=\"heap\"}",
+          "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1762,7 +1947,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "jvm_memory_max_bytes{job=\"russian-cheatsheet\", area=\"heap\"}",
+          "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1783,7 +1968,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 43
+        "y": 46
       },
       "id": 163,
       "panels": [],
@@ -1824,6 +2009,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1838,7 +2024,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1854,7 +2041,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 44
+        "y": 47
       },
       "id": 143,
       "options": {
@@ -1871,7 +2058,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1879,7 +2066,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "increase(http_server_requests_seconds_count{job=\"russian-cheatsheet\"}[1m])",
+          "expr": "increase(http_server_requests_seconds_count{job=\"$app\"}[1m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -1923,6 +2110,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -1937,7 +2125,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -1953,7 +2142,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 44
+        "y": 47
       },
       "id": 155,
       "options": {
@@ -1970,7 +2159,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -1978,7 +2167,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_sum{job=\"russian-cheatsheet\"}[4m]) / rate(http_server_requests_seconds_count{job=\"russian-cheatsheet\"}[4m])",
+          "expr": "rate(http_server_requests_seconds_sum{job=\"$app\"}[4m]) / rate(http_server_requests_seconds_count{job=\"$app\"}[4m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -2022,6 +2211,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2036,7 +2226,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2052,7 +2243,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 52
+        "y": 55
       },
       "id": 153,
       "options": {
@@ -2069,7 +2260,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -2077,7 +2268,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "http_server_requests_seconds_max{job=\"russian-cheatsheet\"}",
+          "expr": "http_server_requests_seconds_max{job=\"$app\"}",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -2121,6 +2312,7 @@
               "type": "linear"
             },
             "showPoints": "never",
+            "showValues": false,
             "spanNulls": false,
             "stacking": {
               "group": "A",
@@ -2135,7 +2327,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -2151,7 +2344,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 52
+        "y": 55
       },
       "id": 151,
       "options": {
@@ -2168,7 +2361,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.0.2",
+      "pluginVersion": "12.3.0",
       "targets": [
         {
           "datasource": {
@@ -2176,7 +2369,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(http_server_requests_seconds_sum{job=\"russian-cheatsheet\"}[2m])",
+          "expr": "rate(http_server_requests_seconds_sum{job=\"$app\"}[2m])",
           "interval": "",
           "legendFormat": "{{method}} - {{uri}} - {{status}}",
           "range": true,
@@ -2189,10 +2382,27 @@
   ],
   "preload": false,
   "refresh": "10s",
-  "schemaVersion": 41,
+  "schemaVersion": 42,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "text": "$app-api",
+          "value": "$app-api"
+        },
+        "name": "app",
+        "options": [
+          {
+            "selected": true,
+            "text": "$app-api",
+            "value": "$app-api"
+          }
+        ],
+        "query": "$app-api",
+        "type": "custom"
+      }
+    ]
   },
   "time": {
     "from": "now-1h",
@@ -2202,5 +2412,5 @@
   "timezone": "browser",
   "title": "Russian cheatsheet",
   "uid": "pmawgrlGk__",
-  "version": 17
+  "version": 1
 }
