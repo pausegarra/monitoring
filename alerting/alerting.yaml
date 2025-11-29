@@ -6,7 +6,7 @@ groups:
     interval: 1m
     rules:
       - uid: af5l2frra7oxsb
-        title: Private % Memory usage
+        title: [Private] % Memory usage
         condition: C
         data:
           - refId: A
@@ -211,6 +211,111 @@ groups:
         for: 1m
         annotations: { }
         labels: { }
+        isPaused: false
+        notification_settings:
+          receiver: Email Lattice
+      - uid: af5l5kr8pw64gb
+        title: '[Lattice Axis] % Memmory usage'
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: feqjruau7xptsc
+            model:
+              editorMode: code
+              expr: |-
+                max by (name) (container_memory_working_set_bytes{container_label_com_docker_compose_project="root", name="latticeaxissite"})
+                /
+                max by (name) (container_spec_memory_limit_bytes{container_label_com_docker_compose_project="root", name="latticeaxissite"})
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0.8
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: [ ]
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations: { }
+        labels: { }
+        isPaused: false
+        notification_settings:
+          receiver: Email Lattice
+      - uid: ef5l5rvzr63uod
+        title: '[Lattice Axis] % CPU Load'
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: feqjruau7xptsc
+            model:
+              editorMode: code
+              expr: "max by (name) (rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_project=\"root\", name=\"latticeaxissite\"}[1m])) / (\n  max by (name) (container_spec_cpu_quota{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name=\"latticeaxissite\"})\n  / \n  max by (name) (container_spec_cpu_period{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name=\"latticeaxissite\"})\n)"
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0.8
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations: {}
+        labels: {}
         isPaused: false
         notification_settings:
           receiver: Email Lattice
