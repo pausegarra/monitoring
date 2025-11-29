@@ -6,7 +6,7 @@ groups:
     interval: 1m
     rules:
       - uid: af5l2frra7oxsb
-        title: [Private] % Memory usage
+        title: '[Private] % Memory usage'
         condition: C
         data:
           - refId: A
