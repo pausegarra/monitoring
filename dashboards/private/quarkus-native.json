@@ -48,12 +48,89 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 3
       },
       "id": 125,
       "panels": [],
       "title": "Quick Facts",
       "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "{__name__=\"container_memory_usage_bytes\", container_label_architecture=\"x86_64\", container_label_build_date=\"2025-04-30T08:49:38\", container_label_com_docker_compose_config_hash=\"9bfa51910fe66388dd378f01632425ec217ab73748344fcd96646bf8e5699abe\", container_label_com_docker_compose_container_number=\"1\", container_label_com_docker_compose_image=\"sha256:788fd44149844e773c980dcf67050f0e0cd2d3de18b2fb88a6285c24b82439a5\", container_label_com_docker_compose_oneoff=\"False\", container_label_com_docker_compose_project=\"root\", container_label_com_docker_compose_project_config_files=\"-\", container_label_com_docker_compose_project_working_dir=\"/root\", container_label_com_docker_compose_replace=\"russian-cheatsheet-api\", container_label_com_docker_compose_service=\"russian-cheatsheet-api\", container_label_com_docker_compose_version=\"2.40.1\", container_label_com_redhat_component=\"ubi9-micro-container\", container_label_com_redhat_license_terms=\"https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI\", container_label_description=\"Very small image which doesn't install the package manager.\", container_label_distribution_scope=\"public\", container_label_io_buildah_version=\"1.39.0-dev\", container_label_io_k8s_description=\"Very small image which doesn't install the package manager.\", container_label_io_k8s_display_name=\"Red Hat Universal Base Image 9 Micro\", container_label_maintainer=\"Red Hat, Inc.\", container_label_name=\"ubi9/ubi-micro\", container_label_release=\"1746002938\", container_label_summary=\"ubi9 micro image\", container_label_url=\"https://www.redhat.com\", container_label_vcs_ref=\"b90d9fb02b3a7b280f0ffe16e69bbd67c0134c4a\", container_label_vcs_type=\"git\", container_label_vendor=\"Red Hat, Inc.\", container_label_version=\"9.5\", id=\"/system.slice/docker-dd57104c39f52d14dabe113f2d4c83b069dba04de37ae1fb6b29ff7ac40bc8cc.scope\", image=\"psegarra/russian-cheatsheet-api:1.3.3\", instance=\"cadvisor:8080\", job=\"cadvisor\", name=\"russian-cheatsheet-api\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 165,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (name) (container_memory_usage_bytes{name=\"$app\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Container Memory Usage",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -95,7 +172,7 @@
         "h": 3,
         "w": 8,
         "x": 0,
-        "y": 1
+        "y": 4
       },
       "id": 63,
       "maxDataPoints": 100,
@@ -180,7 +257,7 @@
         "h": 3,
         "w": 8,
         "x": 8,
-        "y": 1
+        "y": 4
       },
       "id": 92,
       "maxDataPoints": 100,
@@ -269,7 +346,7 @@
         "h": 3,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 4
       },
       "id": 164,
       "options": {
@@ -337,7 +414,7 @@
         "h": 3,
         "w": 8,
         "x": 0,
-        "y": 4
+        "y": 7
       },
       "id": 166,
       "options": {
@@ -361,7 +438,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "container_memory_max_usage_bytes{name=\"$app\"}",
+          "expr": "max by (name) (container_memory_max_usage_bytes{name=\"$app\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -416,7 +493,7 @@
         "h": 3,
         "w": 8,
         "x": 8,
-        "y": 4
+        "y": 7
       },
       "id": 65,
       "maxDataPoints": 100,
@@ -458,73 +535,12 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "feqjruau7xptsc"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
-          },
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 8,
-        "x": 16,
-        "y": 4
-      },
-      "id": 165,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "container_memory_usage_bytes{name=\"$app\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Container Memory Usage",
-      "type": "stat"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 10
       },
       "id": 126,
       "panels": [],
@@ -598,7 +614,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 8
+        "y": 11
       },
       "id": 111,
       "options": {
@@ -708,7 +724,7 @@
         "h": 7,
         "w": 9,
         "x": 9,
-        "y": 8
+        "y": 11
       },
       "id": 113,
       "options": {
@@ -869,7 +885,7 @@
         "h": 7,
         "w": 6,
         "x": 18,
-        "y": 8
+        "y": 11
       },
       "id": 112,
       "options": {
@@ -918,7 +934,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 18
       },
       "id": 127,
       "panels": [],
@@ -992,7 +1008,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 19
       },
       "id": 24,
       "options": {
@@ -1039,7 +1055,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_memory_usage_bytes{name=\"$app\"}",
+          "expr": "max by (name) (container_memory_usage_bytes{name=\"$app\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "container",
@@ -1052,7 +1068,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_spec_memory_limit_bytes{name=\"$app\"}",
+          "expr": "max by (name) (container_spec_memory_limit_bytes{name=\"$app\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "max",
@@ -1069,7 +1085,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 26
       },
       "id": 128,
       "panels": [],
@@ -1143,9 +1159,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 11,
+        "w": 8,
         "x": 0,
-        "y": 24
+        "y": 27
       },
       "id": 106,
       "options": {
@@ -1264,9 +1280,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 13,
-        "x": 11,
-        "y": 24
+        "w": 8,
+        "x": 8,
+        "y": 27
       },
       "id": 93,
       "options": {
@@ -1294,7 +1310,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(container_cpu_usage_seconds_total{name=\"$app\", cpu=\"total\"}[1m])",
+          "expr": "max by (name) (rate(container_cpu_usage_seconds_total{name=\"$app\", cpu=\"total\"}[1m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "container load",
@@ -1309,7 +1325,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_spec_cpu_quota{name=\"$app\"} / container_spec_cpu_period{name=\"$app\"}",
+          "expr": "max by (name) (container_spec_cpu_quota{name=\"$app\"}) / max by (name) (container_spec_cpu_period{name=\"$app\"})",
           "hide": false,
           "instant": false,
           "legendFormat": "max_allowed_cpu",
@@ -1318,6 +1334,103 @@
         }
       ],
       "title": "Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "feqjruau7xptsc"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 27
+      },
+      "id": 167,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "max by (name) (rate(container_cpu_cfs_throttled_periods_total{name=\"$app\"}[1m]))\n/\nmax by (name) (rate(container_cpu_cfs_periods_total{name=\"$app\"}[1m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Throttling",
       "type": "timeseries"
     },
     {
@@ -1477,7 +1590,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 31
+        "y": 34
       },
       "id": 124,
       "options": {
@@ -1585,7 +1698,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 31
+        "y": 34
       },
       "id": 32,
       "options": {
@@ -1739,7 +1852,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 31
+        "y": 34
       },
       "id": 61,
       "options": {
@@ -1803,7 +1916,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 41
       },
       "id": 129,
       "panels": [],
@@ -1878,7 +1991,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 39
+        "y": 42
       },
       "id": 3,
       "maxPerRow": 3,
@@ -1968,7 +2081,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 46
+        "y": 49
       },
       "id": 163,
       "panels": [],
@@ -2041,7 +2154,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 47
+        "y": 50
       },
       "id": 143,
       "options": {
@@ -2142,7 +2255,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 47
+        "y": 50
       },
       "id": 155,
       "options": {
@@ -2243,7 +2356,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 55
+        "y": 58
       },
       "id": 153,
       "options": {
@@ -2344,7 +2457,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 55
+        "y": 58
       },
       "id": 151,
       "options": {
@@ -2412,5 +2525,5 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 3
+  "version": 5
 }
