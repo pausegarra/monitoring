@@ -16,6 +16,10 @@ scrape_configs:
     static_configs:
       - targets: ['host.docker.internal:9115']
 
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
   - job_name: 'http-healthchecks'
     metrics_path: /probe
     params:
