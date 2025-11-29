@@ -45,9 +45,10 @@ services:
       - "host.docker.internal:host-gateway"
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
     container_name: cadvisor
     restart: unless-stopped
+    privileged: true
     ports:
       - "9114:8080"
     volumes:
