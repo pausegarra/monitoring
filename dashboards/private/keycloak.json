@@ -1618,6 +1618,7 @@
             }
           },
           "mappings": [],
+          "max": 100,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1630,7 +1631,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -3497,5 +3499,5 @@
   "timezone": "browser",
   "title": "Keycloak",
   "uid": "apmawgrlGk__",
-  "version": 2
+  "version": 3
 }

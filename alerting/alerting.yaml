@@ -1,380 +1,273 @@
 apiVersion: 1
-
 groups:
-  - name: Infra
-    folder: Infra
+  - orgId: 1
+    name: Every minute
+    folder: Private
     interval: 1m
     rules:
-      - uid: cpu_usage_high
-        title: CPU Usage High
+      - uid: af5l2frra7oxsb
+        title: Private % Memory usage
         condition: C
-
         data:
           - refId: A
             relativeTimeRange:
               from: 600
               to: 0
-            datasourceUid: "feqjruau7xptsc"
+            datasourceUid: feqjruau7xptsc
             model:
               editorMode: code
-              expr: "max(system_cpu_usage) * 100"
+              expr: |-
+                max by (name) (container_memory_working_set_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)"})
+                /
+                max by (name) (container_spec_memory_limit_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)"})
               instant: true
               intervalMs: 1000
-              legendFormat: "__auto"
+              legendFormat: __auto
               maxDataPoints: 43200
               range: false
-              refId: "A"
-
+              refId: A
           - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
+            datasourceUid: __expr__
             model:
               conditions:
                 - evaluator:
-                    params: [ 80 ]
+                    params:
+                      - 0.8
                     type: gt
                   operator:
                     type: and
                   query:
-                    params: [ "C" ]
+                    params:
+                      - C
                   reducer:
-                    params: [ ]
+                    params: []
                     type: last
                   type: query
               datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
+                type: __expr__
+                uid: __expr__
+              expression: A
               intervalMs: 1000
               maxDataPoints: 43200
-              refId: "C"
+              refId: C
               type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        isPaused: false
+        notification_settings:
+          receiver: Email me
+      - uid: ff5l3letpid4wa
+        title: '[Private] CPU % Load'
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: feqjruau7xptsc
+            model:
+              editorMode: code
+              expr: "max by (name) (rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"}[1m])) / (\n  max by (name) (container_spec_cpu_quota{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"})\n  / \n  max by (name) (container_spec_cpu_period{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"})\n)"
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 0.8
+                    type: gt
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations: {}
+        labels: {}
+        isPaused: false
+        notification_settings:
+          receiver: Email me
+      - uid: cf5l4268yh0qoa
+        title: '[Private] Status'
+        condition: C
+        data:
+          - refId: A
+            relativeTimeRange:
+              from: 600
+              to: 0
+            datasourceUid: feqjruau7xptsc
+            model:
+              editorMode: code
+              expr: probe_success{instance!~"(https://latticeaxis.com|https://crossfitlambda.es)"}
+              instant: true
+              intervalMs: 1000
+              legendFormat: __auto
+              maxDataPoints: 43200
+              range: false
+              refId: A
+          - refId: C
+            datasourceUid: __expr__
+            model:
+              conditions:
+                - evaluator:
+                    params:
+                      - 1
+                    type: ne
+                  operator:
+                    type: and
+                  query:
+                    params:
+                      - C
+                  reducer:
+                    params: []
+                    type: last
+                  type: query
+              datasource:
+                type: __expr__
+                uid: __expr__
+              expression: A
+              intervalMs: 1000
+              maxDataPoints: 43200
+              refId: C
+              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        isPaused: false
+        notification_settings:
+          receiver: Email me
 
-  - name: Health
-    folder: Health
+  - orgId: 1
+    name: Every minute
+    folder: Lattice Axis
     interval: 1m
     rules:
-      - uid: auth_health_down
-        title: Auth Service Down
+      - uid: bf5l4lqneo000c
+        title: '[Lattice Axis] Status'
         condition: C
-
         data:
           - refId: A
             relativeTimeRange:
               from: 600
               to: 0
-            datasourceUid: "feqjruau7xptsc"
+            datasourceUid: feqjruau7xptsc
             model:
               editorMode: code
-              expr: 'probe_success{instance="https://auth.pausegarra.es/health/live"}'
+              expr: probe_success{instance="https://latticeaxis.com"}
               instant: true
               intervalMs: 1000
-              legendFormat: "__auto"
+              legendFormat: __auto
               maxDataPoints: 43200
               range: false
-              refId: "A"
-
+              refId: A
           - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
+            datasourceUid: __expr__
             model:
               conditions:
                 - evaluator:
-                    params: [ 0 ]
-                    type: eq
+                    params:
+                      - 1
+                    type: ne
                   operator:
                     type: and
                   query:
-                    params: [ "C" ]
+                    params:
+                      - C
                   reducer:
                     params: [ ]
                     type: last
                   type: query
               datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
+                type: __expr__
+                uid: __expr__
+              expression: A
               intervalMs: 1000
               maxDataPoints: 43200
-              refId: "C"
+              refId: C
               type: threshold
-      - uid: festesdexert_down
-        title: Festes de Xert Down
-        condition: C
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations: { }
+        labels: { }
+        isPaused: false
+        notification_settings:
+          receiver: Email Lattice
 
+  - orgId: 1
+    name: Every minute
+    folder: Lambda
+    interval: 1m
+    rules:
+      - uid: df5l4psv1patcd
+        title: '[Lambda] Status'
+        condition: C
         data:
           - refId: A
             relativeTimeRange:
               from: 600
               to: 0
-            datasourceUid: "feqjruau7xptsc"
+            datasourceUid: feqjruau7xptsc
             model:
               editorMode: code
-              expr: 'probe_success{instance="https://festesdexert.es"}'
+              expr: probe_success{instance="https://crossfitlambda.es"}
               instant: true
               intervalMs: 1000
-              legendFormat: "__auto"
+              legendFormat: __auto
               maxDataPoints: 43200
               range: false
-              refId: "A"
-
+              refId: A
           - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
+            datasourceUid: __expr__
             model:
               conditions:
                 - evaluator:
-                    params: [ 0 ]
-                    type: eq
+                    params:
+                      - 1
+                    type: ne
                   operator:
                     type: and
                   query:
-                    params: [ "C" ]
+                    params:
+                      - C
                   reducer:
                     params: [ ]
                     type: last
                   type: query
               datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
+                type: __expr__
+                uid: __expr__
+              expression: A
               intervalMs: 1000
               maxDataPoints: 43200
-              refId: "C"
+              refId: C
               type: threshold
-      - uid: crossfitlambda_down
-        title: CrossFit Lambda Down
-        condition: C
-
-        data:
-          - refId: A
-            relativeTimeRange:
-              from: 600
-              to: 0
-            datasourceUid: "feqjruau7xptsc"
-            model:
-              editorMode: code
-              expr: 'probe_success{instance="https://crossfitlambda.es"}'
-              instant: true
-              intervalMs: 1000
-              legendFormat: "__auto"
-              maxDataPoints: 43200
-              range: false
-              refId: "A"
-
-          - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
-            model:
-              conditions:
-                - evaluator:
-                    params: [ 0 ]
-                    type: eq
-                  operator:
-                    type: and
-                  query:
-                    params: [ "C" ]
-                  reducer:
-                    params: [ ]
-                    type: last
-                  type: query
-              datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: "C"
-              type: threshold
-      - uid: latticeaxis_down
-        title: LatticeAxis Down
-        condition: C
-
-        data:
-          - refId: A
-            relativeTimeRange:
-              from: 600
-              to: 0
-            datasourceUid: "feqjruau7xptsc"
-            model:
-              editorMode: code
-              expr: 'probe_success{instance="https://latticeaxis.com"}'
-              instant: true
-              intervalMs: 1000
-              legendFormat: "__auto"
-              maxDataPoints: 43200
-              range: false
-              refId: "A"
-
-          - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
-            model:
-              conditions:
-                - evaluator:
-                    params: [ 0 ]
-                    type: eq
-                  operator:
-                    type: and
-                  query:
-                    params: [ "C" ]
-                  reducer:
-                    params: [ ]
-                    type: last
-                  type: query
-              datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: "C"
-              type: threshold
-      - uid: russian_cheatsheet_down
-        title: Russian Cheat Sheet Down
-        condition: C
-
-        data:
-          - refId: A
-            relativeTimeRange:
-              from: 600
-              to: 0
-            datasourceUid: "feqjruau7xptsc"
-            model:
-              editorMode: code
-              expr: 'probe_success{instance="https://russian-cheatsheet.pausegarra.es/api/q/health/live"}'
-              instant: true
-              intervalMs: 1000
-              legendFormat: "__auto"
-              maxDataPoints: 43200
-              range: false
-              refId: "A"
-
-          - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
-            model:
-              conditions:
-                - evaluator:
-                    params: [ 0 ]
-                    type: eq
-                  operator:
-                    type: and
-                  query:
-                    params: [ "C" ]
-                  reducer:
-                    params: [ ]
-                    type: last
-                  type: query
-              datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: "C"
-              type: threshold
-      - uid: sendif_down
-        title: Sendif Down
-        condition: C
-
-        data:
-          - refId: A
-            relativeTimeRange:
-              from: 600
-              to: 0
-            datasourceUid: "feqjruau7xptsc"
-            model:
-              editorMode: code
-              expr: 'probe_success{instance="https://sendif.pausegarra.es"}'
-              instant: true
-              intervalMs: 1000
-              legendFormat: "__auto"
-              maxDataPoints: 43200
-              range: false
-              refId: "A"
-
-          - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
-            model:
-              conditions:
-                - evaluator:
-                    params: [ 0 ]
-                    type: eq
-                  operator:
-                    type: and
-                  query:
-                    params: [ "C" ]
-                  reducer:
-                    params: [ ]
-                    type: last
-                  type: query
-              datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: "C"
-              type: threshold
-      - uid: yotanteo_down
-        title: Yotanteo Down
-        condition: C
-
-        data:
-          - refId: A
-            relativeTimeRange:
-              from: 600
-              to: 0
-            datasourceUid: "feqjruau7xptsc"
-            model:
-              editorMode: code
-              expr: 'probe_success{instance="https://yotanteo.com"}'
-              instant: true
-              intervalMs: 1000
-              legendFormat: "__auto"
-              maxDataPoints: 43200
-              range: false
-              refId: "A"
-
-          - refId: C
-            relativeTimeRange:
-              from: 0
-              to: 0
-            datasourceUid: "__expr__"
-            model:
-              conditions:
-                - evaluator:
-                    params: [ 0 ]
-                    type: eq
-                  operator:
-                    type: and
-                  query:
-                    params: [ "C" ]
-                  reducer:
-                    params: [ ]
-                    type: last
-                  type: query
-              datasource:
-                type: "__expr__"
-                uid: "__expr__"
-              expression: "A"
-              intervalMs: 1000
-              maxDataPoints: 43200
-              refId: "C"
-              type: threshold
+        noDataState: NoData
+        execErrState: Error
+        for: 1m
+        annotations: { }
+        labels: { }
+        isPaused: false
+        notification_settings:
+          receiver: Email Lambda

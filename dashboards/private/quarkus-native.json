@@ -1258,7 +1258,7 @@
               "mode": "off"
             }
           },
-          "decimals": 1,
+          "decimals": 2,
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -2525,5 +2525,5 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 6
+  "version": 7
 }
