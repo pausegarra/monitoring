@@ -35,7 +35,7 @@
       }
     ]
   },
-  "description": "Dashboard for Micrometer instrumented applications (Java, Spring Boot, Micronaut)",
+  "description": "Dashboard for Quarkus Native apps",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -1039,7 +1039,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_memory_usage_bytes{name=\"$app-api\"}",
+          "expr": "container_memory_usage_bytes{name=\"$app\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "container",
@@ -1052,7 +1052,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_spec_memory_limit_bytes{name=\"$app-api\"}",
+          "expr": "container_spec_memory_limit_bytes{name=\"$app\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "max",
@@ -1187,7 +1187,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", name=\"$app-api\"}[1m])) by (name) *100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", name=\"$app\"}[1m])) by (name) *100",
           "hide": false,
           "instant": false,
           "legendFormat": "container",
@@ -1294,7 +1294,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "rate(container_cpu_usage_seconds_total{name=\"$app-api\", cpu=\"total\"}[1m])",
+          "expr": "rate(container_cpu_usage_seconds_total{name=\"$app\", cpu=\"total\"}[1m])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "container load",
@@ -1309,7 +1309,7 @@
             "uid": "feqjruau7xptsc"
           },
           "editorMode": "code",
-          "expr": "container_spec_cpu_quota{name=\"$app-api\"} / container_spec_cpu_period{name=\"$app-api\"}",
+          "expr": "container_spec_cpu_quota{name=\"$app\"} / container_spec_cpu_period{name=\"$app\"}",
           "hide": false,
           "instant": false,
           "legendFormat": "max_allowed_cpu",
@@ -2388,18 +2388,18 @@
     "list": [
       {
         "current": {
-          "text": "$app-api",
-          "value": "$app-api"
+          "text": "$app",
+          "value": "$app"
         },
         "name": "app",
         "options": [
           {
             "selected": true,
-            "text": "$app-api",
-            "value": "$app-api"
+            "text": "$app",
+            "value": "$app"
           }
         ],
-        "query": "$app-api",
+        "query": "russian-cheatsheet-api",
         "type": "custom"
       }
     ]
@@ -2410,7 +2410,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Russian cheatsheet",
+  "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 1
+  "version": 3
 }
