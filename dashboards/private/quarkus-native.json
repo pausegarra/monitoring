@@ -2512,7 +2512,7 @@
             "value": "$app"
           }
         ],
-        "query": "russian-cheatsheet-api",
+        "query": "russian-cheatsheet-api,perxertpassadespert-api",
         "type": "custom"
       }
     ]
@@ -2525,5 +2525,5 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 7
+  "version": 1
 }
