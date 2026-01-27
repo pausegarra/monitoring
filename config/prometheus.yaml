@@ -32,6 +32,7 @@ scrape_configs:
     static_configs:
       - targets:
           - https://russian-cheatsheet.pausegarra.es/api/q/health/live
+          - https://perxertpassadespert.pausegarra.es/api/q/health/live
           - https://auth.pausegarra.es/health/live
           - https://yotanteo.com
           - https://pausegarra.es
