@@ -17,9 +17,9 @@ groups:
             model:
               editorMode: code
               expr: |-
-                max by (name) (container_memory_working_set_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)"})
+                max by (name) (container_memory_working_set_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki)"})
                 /
-                max by (name) (container_spec_memory_limit_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)"})
+                max by (name) (container_spec_memory_limit_bytes{container_label_com_docker_compose_project="root", name!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki)"})
               instant: true
               intervalMs: 1000
               legendFormat: __auto
@@ -68,7 +68,7 @@ groups:
             datasourceUid: feqjruau7xptsc
             model:
               editorMode: code
-              expr: "max by (name) (rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"}[1m])) / (\n  max by (name) (container_spec_cpu_quota{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"})\n  / \n  max by (name) (container_spec_cpu_period{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus)\"})\n)"
+              expr: "max by (name) (rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki)\"}[1m])) / (\n  max by (name) (container_spec_cpu_quota{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki)\"})\n  / \n  max by (name) (container_spec_cpu_period{job=\"cadvisor\", container_label_com_docker_compose_project=\"root\", name!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki)\"})\n)"
               instant: true
               intervalMs: 1000
               legendFormat: __auto
