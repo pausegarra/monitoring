@@ -19,6 +19,7 @@ services:
     restart: always
     depends_on:
       - prometheus
+      - loki
     environment:
       - EMAIL_USERNAME=${EMAIL_USERNAME}
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
@@ -26,6 +27,32 @@ services:
       - KEYCLOAK_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET}
     volumes:
       - grafana-data:/var/lib/grafana
+
+  loki:
+    image: ghcr.io/pausegarra/loki:${VERSION}
+    container_name: loki
+    restart: always
+    ports:
+      - "3100:3100"
+    command:
+      - -config.file=/etc/loki/config.yaml
+    volumes:
+      - loki-data:/loki
+
+  alloy:
+    image: ghcr.io/pausegarra/alloy:${VERSION}
+    container_name: alloy
+    restart: always
+    depends_on:
+      - loki
+    ports:
+      - "12345:12345"
+      - "4317:4317"
+      - "4318:4318"
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - /etc/alloy/config.alloy
 
   blackbox-exporter:
     image: ghcr.io/pausegarra/blackbox-exporter:${VERSION}
@@ -60,3 +87,4 @@ services:
 volumes:
   prometheus-data:
   grafana-data:
+  loki-data:

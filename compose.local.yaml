@@ -1,0 +1,80 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus-local
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-local-data:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana-local
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+      - loki
+    ports:
+      - "3030:3000"
+    environment:
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "false"
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "false"
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-local-data:/var/lib/grafana
+
+  loki:
+    image: grafana/loki:2.9.8
+    container_name: loki-local
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    command:
+      - -config.file=/etc/loki/config.yaml
+    volumes:
+      - ./config/loki-config.yaml:/etc/loki/config.yaml:ro
+      - loki-local-data:/loki
+
+  alloy:
+    image: grafana/alloy:v1.7.5
+    container_name: alloy-local
+    restart: unless-stopped
+    depends_on:
+      - loki
+    ports:
+      - "12345:12345"
+      - "4317:4317"
+      - "4318:4318"
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - /etc/alloy/config.alloy
+    volumes:
+      - ./config/alloy-config.alloy:/etc/alloy/config.alloy:ro
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    container_name: blackbox-exporter-local
+    restart: unless-stopped
+    ports:
+      - "9115:9115"
+
+  nginx_exporter:
+    image: nginx/nginx-prometheus-exporter:1.4.2
+    container_name: nginx-exporter-local
+    restart: unless-stopped
+    command:
+      - -nginx.scrape-uri=http://host.docker.internal:3029/stub_status
+    ports:
+      - "9113:9113"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  prometheus-local-data:
+  grafana-local-data:
+  loki-local-data:
