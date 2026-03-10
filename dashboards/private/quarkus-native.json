@@ -39,7 +39,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 5,
   "links": [],
   "panels": [
     {
@@ -116,7 +115,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -201,7 +200,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -292,7 +291,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "editorMode": "code",
@@ -357,7 +356,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "editorMode": "code",
@@ -437,7 +436,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -521,7 +520,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "editorMode": "code",
@@ -633,7 +632,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -743,7 +742,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -755,7 +754,6 @@
           "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"$app\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"$app\"}[2m]))",
           "format": "time_series",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "interval": "",
           "intervalFactor": 1,
@@ -774,7 +772,6 @@
           "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"$app\"})",
           "format": "time_series",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "interval": "",
           "intervalFactor": 1,
@@ -904,7 +901,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1028,7 +1025,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1056,7 +1053,6 @@
           },
           "editorMode": "code",
           "expr": "max by (name) (container_memory_usage_bytes{name=\"$app\"})",
-          "hide": false,
           "instant": false,
           "legendFormat": "container",
           "range": true,
@@ -1069,7 +1065,6 @@
           },
           "editorMode": "code",
           "expr": "max by (name) (container_spec_memory_limit_bytes{name=\"$app\"})",
-          "hide": false,
           "instant": false,
           "legendFormat": "max",
           "range": true,
@@ -1181,7 +1176,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1191,7 +1186,6 @@
           "editorMode": "code",
           "expr": "process_cpu_usage{job=\"$app\"}",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 1,
           "legendFormat": "process",
           "range": true,
@@ -1204,7 +1198,6 @@
           },
           "editorMode": "code",
           "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", name=\"$app\"}[1m])) by (name) *100",
-          "hide": false,
           "instant": false,
           "legendFormat": "container",
           "range": true,
@@ -1302,7 +1295,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1326,7 +1319,6 @@
           },
           "editorMode": "code",
           "expr": "max by (name) (container_spec_cpu_quota{name=\"$app\"}) / max by (name) (container_spec_cpu_period{name=\"$app\"})",
-          "hide": false,
           "instant": false,
           "legendFormat": "max_allowed_cpu",
           "range": true,
@@ -1420,7 +1412,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "editorMode": "code",
@@ -1610,7 +1602,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1718,7 +1710,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1872,7 +1864,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -1882,7 +1874,6 @@
           "editorMode": "code",
           "expr": "process_files_open_files{job=\"$app\"}",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "open",
           "metric": "",
@@ -1898,7 +1889,6 @@
           "editorMode": "code",
           "expr": "process_files_max_files{job=\"$app\"}",
           "format": "time_series",
-          "hide": false,
           "intervalFactor": 2,
           "legendFormat": "max",
           "metric": "",
@@ -2012,7 +2002,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "repeat": "jvm_memory_pool_heap",
       "repeatDirection": "h",
       "targets": [
@@ -2026,7 +2016,6 @@
           "expr": "jvm_memory_used_bytes{job=~\"$app\", area=\"heap\"}",
           "format": "time_series",
           "fullMetaSearch": false,
-          "hide": false,
           "includeNullMetadata": true,
           "interval": "",
           "intervalFactor": 2,
@@ -2045,7 +2034,6 @@
           "editorMode": "code",
           "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "commited",
@@ -2062,7 +2050,6 @@
           "editorMode": "code",
           "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"heap\"}",
           "format": "time_series",
-          "hide": false,
           "interval": "",
           "intervalFactor": 2,
           "legendFormat": "max",
@@ -2171,7 +2158,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -2272,7 +2259,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -2373,7 +2360,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -2474,7 +2461,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.1",
       "targets": [
         {
           "datasource": {
@@ -2491,6 +2478,59 @@
       ],
       "title": "Sum of the duration of every request",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 63
+      },
+      "id": 169,
+      "panels": [],
+      "title": "Logging",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 24,
+        "x": 0,
+        "y": 64
+      },
+      "id": 168,
+      "options": {
+        "dedupStrategy": "none",
+        "enableInfiniteScrolling": false,
+        "enableLogDetails": true,
+        "showControls": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "syntaxHighlighting": false,
+        "unwrappedColumns": false,
+        "wrapLogMessage": false
+      },
+      "pluginVersion": "12.4.1",
+      "targets": [
+        {
+          "direction": "backward",
+          "editorMode": "builder",
+          "expr": "{job=\"$app\"} | json | line_format `{{.body}}`",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "App logs",
+      "type": "logs"
     }
   ],
   "preload": false,
@@ -2501,19 +2541,14 @@
     "list": [
       {
         "current": {
-          "text": "$app",
-          "value": "$app"
+          "text": "perxertpassadespert-api",
+          "value": "perxertpassadespert-api"
         },
         "name": "app",
-        "options": [
-          {
-            "selected": true,
-            "text": "$app",
-            "value": "$app"
-          }
-        ],
+        "options": [],
         "query": "russian-cheatsheet-api,perxertpassadespert-api",
-        "type": "custom"
+        "type": "custom",
+        "valuesFormat": "csv"
       }
     ]
   },
@@ -2525,5 +2560,6 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 1
+  "version": 4,
+  "weekStart": ""
 }
