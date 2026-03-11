@@ -819,6 +819,18 @@
           "legendFormat": "Container usage (cadvisor)",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "feqjruau7xptsc"
+          },
+          "editorMode": "code",
+          "expr": "max by (name) (container_spec_memory_limit_bytes{name=\"$app\"})",
+          "instant": false,
+          "legendFormat": "max",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "Memory Usage (App vs Container)",
@@ -859,7 +871,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{service_name=\"$app\"} | json | json field=attributes | line_format `{{ if .method }}{{ .method }}{{ else }}-{{ end }} {{ if .path }}{{ .path }}{{ else }}-{{ end }} {{ if .status_code }}{{ .status_code }}{{ else }}-{{ end }} {{ if .duration_seconds }}{{ .duration_seconds }}s{{ else }}-{{ end }} {{ if .body }}{{ .body }}{{ else if .message }}{{ .message }}{{ else if .msg }}{{ .msg }}{{ else }}-{{ end }}`",
+          "expr": "{service_name=\"$app\"} | json | json field=\"attributes\" | line_format `{{ if .attributes_method }}{{ .attributes_method }}{{ else }}-{{ end }} {{ if .attributes_path }}{{ .attributes_path }}{{ else }}-{{ end }} {{ if .attributes_status_code }}{{ .attributes_status_code }}{{ else }}-{{ end }} {{ if .attributes_duration_seconds }}{{ .attributes_duration_seconds }}s{{ else }}-{{ end }} {{ if .body }}{{ .body }}{{ else if .message }}{{ .message }}{{ else if .msg }}{{ .msg }}{{ else }}-{{ end }}`",
           "queryType": "range",
           "refId": "A"
         }
@@ -908,6 +920,6 @@
   "timezone": "browser",
   "title": "SvelteKit Prom Client",
   "uid": "sveltekit-prom",
-  "version": 3,
+  "version": 6,
   "weekStart": ""
 }
