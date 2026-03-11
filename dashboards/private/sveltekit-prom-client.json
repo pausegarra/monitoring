@@ -871,7 +871,7 @@
           },
           "direction": "backward",
           "editorMode": "code",
-          "expr": "{service_name=\"$app\"} | json | json field=\"attributes\" | line_format `{{ if .attributes_method }}{{ .attributes_method }}{{ else }}-{{ end }} {{ if .attributes_path }}{{ .attributes_path }}{{ else }}-{{ end }} {{ if .attributes_status_code }}{{ .attributes_status_code }}{{ else }}-{{ end }} {{ if .attributes_duration_seconds }}{{ .attributes_duration_seconds }}s{{ else }}-{{ end }} {{ if .body }}{{ .body }}{{ else if .message }}{{ .message }}{{ else if .msg }}{{ .msg }}{{ else }}-{{ end }}`",
+          "expr": "{service_name=\"$app\"} | json | json field=\"attributes\" | line_format `{{ if .attributes_method }}{{ .attributes_method }}{{ else }}-{{ end }} {{ if .attributes_path }}{{ .attributes_path }}{{ else }}-{{ end }} {{ if .attributes_status_code }}{{ .attributes_status_code }}{{ else }}-{{ end }} {{ if .attributes_duration_seconds }}{{ .attributes_duration_seconds }}s{{ else }}-{{ end }} {{ if .body }}{{ .body }}{{ else if .message }}{{ .message }}{{ else if .msg }}{{ .msg }}{{ else }}-{{ end }} {{if .attributes_error_message}}{{.attributes_error_message}}{{else}}-{{end}}`",
           "queryType": "range",
           "refId": "A"
         }
@@ -920,6 +920,6 @@
   "timezone": "browser",
   "title": "SvelteKit Prom Client",
   "uid": "sveltekit-prom",
-  "version": 6,
+  "version": 8,
   "weekStart": ""
 }
