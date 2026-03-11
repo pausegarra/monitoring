@@ -12,6 +12,11 @@ scrape_configs:
     static_configs:
       - targets: [ 'host.docker.internal:8082' ]
 
+  - job_name: 'perxertpassadespert-front'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: [ 'host.docker.internal:3027' ]
+
   - job_name: 'keycloak'
     metrics_path: '/metrics'
     static_configs:
@@ -33,6 +38,7 @@ scrape_configs:
       - targets:
           - https://russian-cheatsheet.pausegarra.es/api/q/health/live
           - https://perxertpassadespert.pausegarra.es/api/q/health/live
+          - https://perxertpassadespert.pausegarra.es/health
           - https://auth.pausegarra.es/health/live
           - https://yotanteo.com
           - https://pausegarra.es
