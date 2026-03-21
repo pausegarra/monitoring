@@ -31,6 +31,7 @@ scrape_configs:
       - targets: ['cadvisor:8080']
 
   - job_name: 'overcutai-api'
+    metrics_path: '/api/metrics'
     static_configs:
       - targets: [ 'overcutai-api:8080' ]
 
