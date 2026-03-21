@@ -58,7 +58,7 @@
           },
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "{container=\"keycloak\"} |= ``",
+          "expr": "{container=\"$container\"} |= ``",
           "queryType": "range",
           "refId": "A"
         }
@@ -74,8 +74,8 @@
     "list": [
       {
         "current": {
-          "text": "yotanteo",
-          "value": "yotanteo"
+          "text": "perxertpassadespert-front",
+          "value": "perxertpassadespert-front"
         },
         "datasource": {
           "type": "loki",
