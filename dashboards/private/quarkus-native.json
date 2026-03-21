@@ -2524,7 +2524,7 @@
         {
           "direction": "backward",
           "editorMode": "builder",
-          "expr": "{job=\"$app\"} | json | line_format `{{.body}}`",
+          "expr": "{container=\"$app\"} | json | line_format `{{.body}}`",
           "queryType": "range",
           "refId": "A"
         }
@@ -2560,6 +2560,6 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 4,
+  "version": 6,
   "weekStart": ""
 }
