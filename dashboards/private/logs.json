@@ -68,14 +68,15 @@
     }
   ],
   "preload": false,
+  "refresh": "auto",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "text": "perxertpassadespert-api",
-          "value": "perxertpassadespert-api"
+          "text": "grafana",
+          "value": "grafana"
         },
         "datasource": {
           "type": "loki",
@@ -105,6 +106,6 @@
   "timezone": "browser",
   "title": "Logs",
   "uid": "par9q4p",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
