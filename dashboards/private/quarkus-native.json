@@ -2514,7 +2514,7 @@
         "showControls": false,
         "showLabels": false,
         "showTime": true,
-        "sortOrder": "Descending",
+        "sortOrder": "Ascending",
         "syntaxHighlighting": false,
         "unwrappedColumns": false,
         "wrapLogMessage": false
@@ -2522,9 +2522,9 @@
       "pluginVersion": "12.4.1",
       "targets": [
         {
-          "direction": "backward",
+          "direction": "forward",
           "editorMode": "builder",
-          "expr": "{container=\"$app\"} | json | line_format `{{.body}}`",
+          "expr": "{container=\"$app\"}",
           "queryType": "range",
           "refId": "A"
         }
@@ -2560,6 +2560,6 @@
   "timezone": "browser",
   "title": "Quarkus Native",
   "uid": "pmawgrlGk__",
-  "version": 6,
+  "version": 8,
   "weekStart": ""
 }

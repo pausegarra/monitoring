@@ -43,7 +43,7 @@
         "enableLogDetails": true,
         "showControls": false,
         "showTime": true,
-        "sortOrder": "Descending",
+        "sortOrder": "Ascending",
         "syntaxHighlighting": false,
         "timestampResolution": "ms",
         "unwrappedColumns": false,
@@ -56,7 +56,7 @@
             "type": "loki",
             "uid": "loki"
           },
-          "direction": "backward",
+          "direction": "forward",
           "editorMode": "builder",
           "expr": "{container=\"$container\"} |= ``",
           "queryType": "range",
@@ -74,8 +74,8 @@
     "list": [
       {
         "current": {
-          "text": "perxertpassadespert-front",
-          "value": "perxertpassadespert-front"
+          "text": "perxertpassadespert-api",
+          "value": "perxertpassadespert-api"
         },
         "datasource": {
           "type": "loki",
@@ -105,6 +105,6 @@
   "timezone": "browser",
   "title": "Logs",
   "uid": "par9q4p",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
