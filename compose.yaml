@@ -49,6 +49,8 @@ services:
       - "12345:12345"
       - "4317:4317"
       - "4318:4318"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     command:
       - run
       - --server.http.listen-addr=0.0.0.0:12345
