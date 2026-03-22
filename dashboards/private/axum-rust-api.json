@@ -226,7 +226,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 7,
         "w": 6,
         "x": 12,
         "y": 1
@@ -295,7 +295,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 7,
         "w": 6,
         "x": 18,
         "y": 1
@@ -1167,6 +1167,6 @@
   "timezone": "browser",
   "title": "Axum Rust API",
   "uid": "axum-rust-api",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
