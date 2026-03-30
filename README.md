@@ -1,130 +1,92 @@
 # monitoring
 
-Monitoring stack based on Prometheus, Grafana, Loki, and Alloy.
+Monitoring stack for K3s based on Prometheus, Grafana, Loki, Alloy, and Blackbox Exporter.
 
 ## What it includes
 
-- `Grafana` with provisioned dashboards, alerts, and datasources baked into the custom image.
-- `Prometheus` with scrape configuration defined in `config/prometheus.yaml`.
-- `Loki` for log storage.
-- `Alloy` as the OTLP collector receiving logs and forwarding them to Loki.
-- `Blackbox Exporter`, `nginx-prometheus-exporter`, and `cadvisor`.
+- `Prometheus` scraping application metrics, blackbox HTTP healthchecks, and K3s cAdvisor metrics from kubelet.
+- `Grafana` with provisioned dashboards, alerting, and datasources mounted from Kubernetes `ConfigMap`s.
+- `Loki` for log storage with persistent volume.
+- `Alloy` running as a `DaemonSet` to collect Kubernetes pod logs and forward them to Loki.
+- `Blackbox Exporter` for external HTTP healthchecks.
 
 ## Structure
 
-- `compose.yaml`: production stack using `ghcr.io/pausegarra/...:${VERSION}` images.
-- `compose.local.yaml`: local stack using public images.
-- `Dockerfile.grafana`
-- `Dockerfile.prometheus`
-- `Dockerfile.blackbox`
-- `Dockerfile.loki`
-- `Dockerfile.alloy`
-- `config/alloy-config.alloy`: OTLP receiver on `4317`/`4318` forwarding logs to Loki.
-- `config/loki-config.yaml`: Loki single-binary configuration.
+- `monitoring-namespace.yaml`: namespace for the monitoring stack.
+- `prometheus/`: `Deployment`, `Service`, `ConfigMap`, and RBAC for Prometheus.
+- `grafana/`: `Deployment`, `Service`, `PVC`, provisioned `ConfigMap`s, and Grafana source files.
+- `loki/`: `Deployment`, `Service`, `PVC`, and `ConfigMap` for Loki.
+- `alloy/`: `DaemonSet`, RBAC, `ServiceAccount`, and `ConfigMap` for log collection in Kubernetes.
+- `blackbox/`: `Deployment`, `Service`, and `ConfigMap` for blackbox checks.
+- `config/`: legacy Docker-era source configs kept as references.
+- `compose.yaml`: older Docker-based production stack kept in the repo for reference.
 
-## Production
+## Kubernetes
 
-Production deployment uses `compose.yaml` and expects these environment variables:
+The current deployment target is K3s.
 
-- `VERSION`
+Apply the namespace first:
+
+```bash
+kubectl apply -f monitoring-namespace.yaml
+```
+
+Then apply the components:
+
+```bash
+kubectl apply -f loki/configmap.yaml
+kubectl apply -f loki/pvc.yaml
+kubectl apply -f loki/deployment.yaml
+kubectl apply -f loki/service.yaml
+
+kubectl apply -f blackbox/configmap.yaml
+kubectl apply -f blackbox/deployment.yaml
+kubectl apply -f blackbox/service.yaml
+
+kubectl apply -f alloy/serviceaccount.yaml
+kubectl apply -f alloy/rbac.yaml
+kubectl apply -f alloy/configmap.yaml
+kubectl apply -f alloy/daemonset.yaml
+
+kubectl apply -f prometheus/rbac.yaml
+kubectl apply -f prometheus/configmap.yaml
+kubectl apply -f prometheus/deployment.yaml
+kubectl apply -f prometheus/service.yaml
+
+kubectl apply -f grafana/configmap-grafana-ini.yaml
+kubectl apply -f grafana/configmap-grafana-datasources.yaml
+kubectl apply -f grafana/configmap-grafana-alerting.yaml
+kubectl apply -f grafana/configmap-grafana-dashboards.yaml
+kubectl apply -f grafana/configmap-grafana-dashboards-2.yaml
+kubectl apply -f grafana/pvc.yaml
+kubectl apply -f grafana/deployment.yaml
+kubectl apply -f grafana/service.yaml
+```
+
+Grafana expects an existing secret named `grafana-secret` in namespace `monitoring` with these keys:
+
 - `EMAIL_USERNAME`
 - `EMAIL_PASSWORD`
 - `KEYCLOAK_CLIENT_ID`
 - `KEYCLOAK_CLIENT_SECRET`
 
-Exposed ports:
-
-- Grafana: `3030`
-- Prometheus: `9090`
-- Loki: `3100`
-- Alloy internal HTTP endpoint: `12345`
-- Alloy OTLP gRPC: `4317`
-- Alloy OTLP HTTP: `4318`
+## Grafana Provisioning
 
 Grafana provisions:
 
 - Prometheus as the default datasource
 - Loki as the logs datasource
-- dashboards from `dashboards/`
-- alerting resources from `alerting/`
+- dashboards from `grafana/dashboards/`
+- alerting resources from `grafana/alerting/`
+- configuration from `grafana/config/grafana.ini`
 
-## Local
+Dashboard manifests are split across two `ConfigMap`s to stay below Kubernetes object size limits:
 
-To start the local stack:
+- `grafana/configmap-grafana-dashboards.yaml`
+- `grafana/configmap-grafana-dashboards-2.yaml`
 
-```bash
-docker compose -f compose.local.yaml up -d
-```
+## Logs
 
-The local compose uses public images and is intended for validating connectivity and log ingestion. It does not fully replicate the provisioned Grafana setup used in production.
+In Kubernetes, Alloy collects logs from pods via Kubernetes discovery and sends them to Loki.
 
-Local endpoints:
-
-- Grafana: `http://localhost:3030`
-- Prometheus: `http://localhost:9090`
-- Loki: `http://localhost:3100`
-- Alloy OTLP gRPC: `localhost:4317`
-- Alloy OTLP HTTP: `http://localhost:4318`
-
-Default local Grafana credentials:
-
-- username: `admin`
-- password: `admin`
-
-You can override them when starting the stack:
-
-```bash
-GRAFANA_ADMIN_USER=admin GRAFANA_ADMIN_PASSWORD=secret docker compose -f compose.local.yaml up -d
-```
-
-## Manual build
-
-Available targets in `Makefile`:
-
-```bash
-make build-grafana
-make build-prometheus
-make build-blackbox
-make build-loki
-make build-alloy
-```
-
-There are also `run-*` and `remove-*` targets for each image.
-
-## CI/CD
-
-The `.github/workflows/deploy.yaml` workflow runs whenever a tag matching `*.*.*` is pushed.
-
-Pipeline:
-
-1. Builds and pushes images to GHCR:
-   - `ghcr.io/pausegarra/grafana:<tag>`
-   - `ghcr.io/pausegarra/prometheus:<tag>`
-   - `ghcr.io/pausegarra/blackbox-exporter:<tag>`
-   - `ghcr.io/pausegarra/loki:<tag>`
-   - `ghcr.io/pausegarra/alloy:<tag>`
-2. Runs `docker pull` on the remote server.
-3. Runs `docker compose up -d --force-recreate` by piping `compose.yaml` over `stdin`.
-
-Required GitHub Actions secrets:
-
-- `SSH_PRIVATE_KEY`
-- `SSH_PORT`
-- `SSH_USERNAME`
-- `SSH_HOST`
-- `EMAIL_USERNAME`
-- `EMAIL_PASSWORD`
-- `KEYCLOAK_CLIENT_ID`
-- `KEYCLOAK_CLIENT_SECRET`
-
-## Logs via OTLP
-
-Projects should send logs to Alloy. The current pipeline promotes these attributes to Loki labels:
-
-- `service.name`
-- `service.namespace`
-- `deployment.environment.name`
-- `level`
-- `logger`
-
-For them to show up as filterable labels in Grafana, services must include these attributes in their OTLP telemetry.
+Projects can still send OTLP logs separately if needed, but the current K3s deployment is focused on Kubernetes pod log collection rather than the older Docker OTLP pipeline.
