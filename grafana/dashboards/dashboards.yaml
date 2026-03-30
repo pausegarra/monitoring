@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: private-dashboards
+    type: file
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    disableDeletion: true
+    folder: Private
+    options:
+      path: /etc/grafana/provisioning/dashboards/private

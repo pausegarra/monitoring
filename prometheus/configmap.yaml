@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-cm
+  namespace: monitoring
+  labels:
+    app: prometheus
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+
+    scrape_configs:
+      - job_name: 'russian-cheatsheet-api'
+        metrics_path: '/api/q/metrics'
+        static_configs:
+          - targets: [ 'russian-cheatsheet-api-svc.main.svc.cluster.local:8080' ]
+
+      - job_name: 'perxertpassadespert-api'
+        metrics_path: '/api/q/metrics'
+        static_configs:
+          - targets: [ 'perxertpassadespert-api-svc.main.svc.cluster.local:8080' ]
+
+      - job_name: 'perxertpassadespert-front'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets: [ 'perxertpassadespert-front-svc.main.svc.cluster.local:3000' ]
+
+      - job_name: 'keycloak'
+        metrics_path: '/metrics'
+        static_configs:
+          - targets: [ 'auth-svc.main.svc.cluster.local:9000' ]
+
+      - job_name: 'cadvisor'
+        scheme: https
+        kubernetes_sd_configs:
+          - role: node
+        bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+        tls_config:
+          ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecure_skip_verify: true
+        relabel_configs:
+          - action: labelmap
+            regex: __meta_kubernetes_node_label_(.+)
+          - source_labels: [__meta_kubernetes_node_name]
+            target_label: instance
+          - target_label: __address__
+            replacement: kubernetes.default.svc.cluster.local:443
+          - source_labels: [__meta_kubernetes_node_name]
+            target_label: __metrics_path__
+            replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+
+      - job_name: 'http-healthchecks'
+        metrics_path: /probe
+        params:
+          module: [ http_2xx ]
+        static_configs:
+          - targets:
+              - https://russian-cheatsheet.pausegarra.com/api/q/health/live
+              - https://perxertpassadespert.pausegarra.com/api/q/health/live
+              - https://perxertpassadespert.pausegarra.com/health
+              - https://auth.pausegarra.com/health/live
+              - https://pausegarra.com
+              - https://sendif.pausegarra.com
+              - https://latticeaxis.com
+              - https://crossfitlambda.com
+              - https://festesdexert.es
+        relabel_configs:
+          - source_labels: [ __address__ ]
+            target_label: __param_target
+          - source_labels: [ __param_target ]
+            target_label: instance
+          - target_label: __address__
+            replacement: blackbox-exporter-svc.monitoring.svc.cluster.local:9115

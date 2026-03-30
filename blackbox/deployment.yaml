@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+  labels:
+    app: blackbox-exporter
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: blackbox-exporter
+  template:
+    metadata:
+      labels:
+        app: blackbox-exporter
+    spec:
+      containers:
+        - name: blackbox-exporter
+          image: prom/blackbox-exporter:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/blackbox_exporter/blackbox.yaml
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+          ports:
+            - containerPort: 9115
+              protocol: TCP
+          volumeMounts:
+            - name: blackbox-config
+              mountPath: /etc/blackbox_exporter/blackbox.yaml
+              subPath: blackbox.yaml
+      volumes:
+        - name: blackbox-config
+          configMap:
+            name: blackbox-cm

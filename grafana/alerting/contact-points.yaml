@@ -1,0 +1,29 @@
+apiVersion: 1
+
+contactPoints:
+  - name: Email me
+    receivers:
+      - uid: cer8gifzbe6m8a
+        type: email
+        settings:
+          addresses: "pausegarra.b@gmail.com"
+          singleEmail: false
+        disableResolveMessage: false
+
+  - name: Email Lattice
+    receivers:
+      - uid: fesvgjnugcf7kc
+        type: email
+        settings:
+          addresses: "pausegarra.b@gmail.com, mrferrys@gmail.com"
+          singleEmail: false
+        disableResolveMessage: false
+
+  - name: Email Lambda
+    receivers:
+      - uid: betl2bziq0v7ke
+        type: email
+        settings:
+          addresses: "andy.szabova@gmail.com, crossfitlambda@gmail.com, pausegarra.b@gmail.com"
+          singleEmail: false
+        disableResolveMessage: false
