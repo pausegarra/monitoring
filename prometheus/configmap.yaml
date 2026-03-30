@@ -63,7 +63,7 @@ data:
               - https://pausegarra.com
               - https://sendif.pausegarra.com
               - https://latticeaxis.com
-              - https://crossfitlambda.com
+              - https://crossfitlambda.es
               - https://festesdexert.es
         relabel_configs:
           - source_labels: [ __address__ ]

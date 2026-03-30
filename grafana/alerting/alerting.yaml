@@ -226,9 +226,9 @@ groups:
             model:
               editorMode: code
               expr: |-
-                max by (container) (container_memory_working_set_bytes{namespace="main", container="latticeaxissite", image!=""})
+                max by (container) (container_memory_working_set_bytes{namespace="lattice", container="lattice-site", image!=""})
                 /
-                clamp_min(max by (container) (container_spec_memory_limit_bytes{namespace="main", container="latticeaxissite", image!=""}), 1)
+                clamp_min(max by (container) (container_spec_memory_limit_bytes{namespace="lattice", container="lattice-site", image!=""}), 1)
               instant: true
               intervalMs: 1000
               legendFormat: __auto
@@ -279,7 +279,7 @@ groups:
             datasourceUid: feqjruau7xptsc
             model:
               editorMode: code
-              expr: "max by (container) (rate(container_cpu_usage_seconds_total{job=\"cadvisor\", namespace=\"main\", container=\"latticeaxissite\", image!=\"\"}[1m])) / clamp_min(\n  max by (container) (container_spec_cpu_quota{job=\"cadvisor\", namespace=\"main\", container=\"latticeaxissite\", image!=\"\"})\n  /\n  max by (container) (container_spec_cpu_period{job=\"cadvisor\", namespace=\"main\", container=\"latticeaxissite\", image!=\"\"}),\n  0.001\n)"
+              expr: "max by (container) (rate(container_cpu_usage_seconds_total{job=\"cadvisor\", namespace=\"lattice\", container=\"lattice-site\", image!=\"\"}[1m])) / clamp_min(\n  max by (container) (container_spec_cpu_quota{job=\"cadvisor\", namespace=\"lattice\", container=\"lattice-site\", image!=\"\"})\n  /\n  max by (container) (container_spec_cpu_period{job=\"cadvisor\", namespace=\"lattice\", container=\"lattice-site\", image!=\"\"}),\n  0.001\n)"
               instant: true
               intervalMs: 1000
               legendFormat: __auto
