@@ -2022,7 +2022,6 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 1,
-      "id": 4,
       "links": [],
       "panels": [
         {
@@ -2099,7 +2098,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2184,7 +2183,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2272,7 +2271,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -2337,11 +2336,11 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
-              "expr": "max by (container) (container_memory_max_usage_bytes{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"})",
+              "expr": "max by (container) (container_memory_max_usage_bytes{job=\"cadvisor\", namespace=\"main\", container=\"auth\", image!=\"\"})",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -2417,7 +2416,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2514,7 +2513,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2633,7 +2632,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2743,7 +2742,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -2755,7 +2754,6 @@ data:
               "expr": "sum(rate(http_server_requests_seconds_sum{status!~\"5..\", job=\"$app\"}[2m])) / sum(rate(http_server_requests_seconds_count{status!~\"5..\", job=\"$app\"}[2m]))",
               "format": "time_series",
               "fullMetaSearch": false,
-              "hide": false,
               "includeNullMetadata": true,
               "interval": "",
               "intervalFactor": 1,
@@ -2774,7 +2772,6 @@ data:
               "expr": "max(http_server_requests_seconds_max{status!~\"5..\", job=\"$app\"})",
               "format": "time_series",
               "fullMetaSearch": false,
-              "hide": false,
               "includeNullMetadata": true,
               "interval": "",
               "intervalFactor": 1,
@@ -2904,7 +2901,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3028,7 +3025,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3140,7 +3137,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3249,7 +3246,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3273,7 +3270,6 @@ data:
               },
               "editorMode": "code",
               "expr": "max by (container) (container_memory_usage_bytes{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"})",
-              "hide": false,
               "instant": false,
               "legendFormat": "container",
               "range": true,
@@ -3286,7 +3282,6 @@ data:
               },
               "editorMode": "code",
               "expr": "max by (container) (container_spec_memory_limit_bytes{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"})",
-              "hide": false,
               "instant": false,
               "legendFormat": "limit",
               "range": true,
@@ -3398,7 +3393,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3408,7 +3403,6 @@ data:
               "editorMode": "code",
               "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"}[1m])) by (container) *100",
               "format": "time_series",
-              "hide": false,
               "intervalFactor": 1,
               "legendFormat": "container",
               "metric": "",
@@ -3424,7 +3418,6 @@ data:
               "editorMode": "code",
               "expr": "process_cpu_usage{job=\"$app\"}",
               "format": "time_series",
-              "hide": false,
               "intervalFactor": 1,
               "legendFormat": "process",
               "range": true,
@@ -3522,7 +3515,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3546,7 +3539,6 @@ data:
               },
               "editorMode": "code",
               "expr": "max by (container) (container_spec_cpu_quota{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"}) / max by (container) (container_spec_cpu_period{job=\"cadvisor\", namespace=\"main\", container=\"$app\", image!=\"\"})",
-              "hide": false,
               "instant": false,
               "legendFormat": "limit",
               "range": true,
@@ -3639,7 +3631,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -3829,7 +3821,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -3937,7 +3929,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -4091,7 +4083,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -4101,7 +4093,6 @@ data:
               "editorMode": "code",
               "expr": "process_files_open_files{job=\"$app\"}",
               "format": "time_series",
-              "hide": false,
               "intervalFactor": 2,
               "legendFormat": "open",
               "metric": "",
@@ -4117,7 +4108,6 @@ data:
               "editorMode": "code",
               "expr": "process_files_max_files{job=\"$app\"}",
               "format": "time_series",
-              "hide": false,
               "intervalFactor": 2,
               "legendFormat": "max",
               "metric": "",
@@ -4231,7 +4221,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.3.0",
+          "pluginVersion": "12.4.2",
           "repeat": "jvm_memory_pool_heap",
           "repeatDirection": "h",
           "targets": [
@@ -4245,7 +4235,6 @@ data:
               "expr": "jvm_memory_used_bytes{job=~\"$app\", area=\"heap\"}",
               "format": "time_series",
               "fullMetaSearch": false,
-              "hide": false,
               "includeNullMetadata": true,
               "interval": "",
               "intervalFactor": 2,
@@ -4264,7 +4253,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"heap\"}",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "commited",
@@ -4281,7 +4269,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"heap\"}",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -4407,7 +4394,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_memory_used_bytes{job=\"$app\", area=\"nonheap\"}",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "used",
@@ -4424,7 +4410,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_memory_committed_bytes{job=\"$app\", area=\"nonheap\"}",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "commited",
@@ -4441,7 +4426,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_memory_max_bytes{job=\"$app\", area=\"nonheap\"}",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "max",
@@ -4561,7 +4545,6 @@ data:
               "editorMode": "code",
               "expr": "rate(jvm_gc_pause_seconds_count{job=\"$app\"}[2m])",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "{{action}} ({{cause}})",
@@ -4666,7 +4649,6 @@ data:
               "editorMode": "code",
               "expr": "rate(jvm_gc_pause_seconds_sum{job=\"$app\"}[1m])/rate(jvm_gc_pause_seconds_count{job=\"$app\"}[1m])",
               "format": "time_series",
-              "hide": false,
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "avg {{action}} ({{cause}})",
@@ -4680,7 +4662,6 @@ data:
               "editorMode": "code",
               "expr": "jvm_gc_pause_seconds_max{job=\"$app\"}",
               "format": "time_series",
-              "hide": false,
               "instant": false,
               "intervalFactor": 1,
               "legendFormat": "max {{action}} ({{cause}})",
@@ -5019,7 +5000,6 @@ data:
               "editorMode": "code",
               "expr": "delta(jvm_classes_loaded_classes{job=\"$app\"}[2m])",
               "format": "time_series",
-              "hide": false,
               "interval": "",
               "intervalFactor": 1,
               "legendFormat": "delta-1m",
@@ -5462,15 +5442,10 @@ data:
               "value": "keycloak"
             },
             "name": "app",
-            "options": [
-              {
-                "selected": true,
-                "text": "keycloak",
-                "value": "keycloak"
-              }
-            ],
+            "options": [],
             "query": "keycloak",
-            "type": "custom"
+            "type": "custom",
+            "valuesFormat": "csv"
           }
         ]
       },
@@ -5482,7 +5457,8 @@ data:
       "timezone": "browser",
       "title": "Keycloak",
       "uid": "apmawgrlGk__",
-      "version": 3
+      "version": 3,
+      "weekStart": ""
     }
   logs.json: |-
     {
