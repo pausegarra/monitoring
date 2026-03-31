@@ -5512,7 +5512,7 @@ data:
             "unwrappedColumns": false,
             "wrapLogMessage": false
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "datasource": {
@@ -5521,7 +5521,7 @@ data:
               },
               "direction": "forward",
               "editorMode": "builder",
-              "expr": "{container=\"$container\"} |= ``",
+              "expr": "{app=\"$container\"} |= ``",
               "queryType": "range",
               "refId": "A"
             }
@@ -5538,8 +5538,8 @@ data:
         "list": [
           {
             "current": {
-              "text": "grafana",
-              "value": "grafana"
+              "text": "overcut-ai-data-ingestor",
+              "value": "overcut-ai-data-ingestor"
             },
             "datasource": {
               "type": "loki",
@@ -5549,7 +5549,7 @@ data:
             "name": "container",
             "options": [],
             "query": {
-              "label": "container",
+              "label": "app",
               "refId": "LokiVariableQueryEditor-VariableQuery",
               "stream": "",
               "type": 1
@@ -5569,7 +5569,7 @@ data:
       "timezone": "browser",
       "title": "Logs",
       "uid": "par9q4p",
-      "version": 4,
+      "version": 2,
       "weekStart": ""
     }
 kind: ConfigMap
