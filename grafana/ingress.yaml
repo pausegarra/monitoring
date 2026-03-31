@@ -58,4 +58,4 @@ spec:
               service:
                 name: dummy-svc
                 port:
-                  number: 3000
+                  number: 80
