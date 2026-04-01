@@ -113,7 +113,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -181,7 +181,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -250,7 +250,7 @@ data:
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -319,7 +319,7 @@ data:
             "showThresholdMarkers": true,
             "sizing": "auto"
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -387,7 +387,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -453,7 +453,7 @@ data:
             "textMode": "auto",
             "wideLayout": true
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -561,7 +561,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -655,7 +655,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -749,7 +749,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -863,7 +863,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -966,7 +966,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -1061,7 +1061,7 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "12.4.1",
+          "pluginVersion": "12.4.2",
           "targets": [
             {
               "editorMode": "code",
@@ -1150,13 +1150,13 @@ data:
         "list": [
           {
             "current": {
-              "text": "overcutai-api",
-              "value": "overcutai-api"
+              "text": "overcut-ai-api",
+              "value": "overcut-ai-api"
             },
             "label": "App",
             "name": "app",
             "options": [],
-            "query": "overcutai-api",
+            "query": "overcut-ai-api",
             "type": "custom",
             "valuesFormat": "csv"
           }
@@ -1170,7 +1170,7 @@ data:
       "timezone": "browser",
       "title": "Axum Rust API",
       "uid": "axum-rust-api",
-      "version": 3,
+      "version": 1,
       "weekStart": ""
     }
   cadvisor.json: |
