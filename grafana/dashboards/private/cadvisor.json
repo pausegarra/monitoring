@@ -18,7 +18,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
   "links": [],
   "panels": [
     {
@@ -121,7 +120,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -129,7 +128,6 @@
             "uid": "feqjruau7xptsc"
           },
           "expr": "sum(rate(container_cpu_usage_seconds_total{job=\"cadvisor\",instance=~\"$host\",pod=~\"$container\",container!=\"\",image!=\"\"}[5m])) by (pod) *100",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -237,7 +235,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -245,7 +243,6 @@
             "uid": "feqjruau7xptsc"
           },
           "expr": "sum(container_memory_rss{job=\"cadvisor\",instance=~\"$host\",pod=~\"$container\",container!=\"\",image!=\"\"}) by (pod)",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -340,7 +337,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -348,7 +345,6 @@
             "uid": "feqjruau7xptsc"
           },
           "expr": "sum(container_memory_cache{job=\"cadvisor\",instance=~\"$host\",pod=~\"$container\",container!=\"\",image!=\"\"}) by (pod)",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -456,7 +452,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -464,7 +460,6 @@
             "uid": "feqjruau7xptsc"
           },
           "expr": "sum(rate(container_network_receive_bytes_total{job=\"cadvisor\",instance=~\"$host\",pod=~\"$container\",container!=\"\",image!=\"\"}[5m])) by (pod)",
-          "hide": false,
           "interval": "",
           "legendFormat": "{{name}}",
           "refId": "A"
@@ -559,7 +554,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -677,7 +672,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "12.3.0",
+      "pluginVersion": "12.4.2",
       "targets": [
         {
           "datasource": {
@@ -717,12 +712,12 @@
             "indexByName": {},
             "renameByName": {
               "Value": "Running",
-              "namespace": "Namespace",
-              "pod": "Pod",
               "container": "Container",
-              "node": "Node",
               "image": "Registry Image",
-              "instance": "Instance"
+              "instance": "Instance",
+              "namespace": "Namespace",
+              "node": "Node",
+              "pod": "Pod"
             }
           }
         }
@@ -731,7 +726,7 @@
     }
   ],
   "preload": false,
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 42,
   "tags": [
     "cadvisor",
@@ -745,7 +740,6 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "feqjruau7xptsc",
         "definition": "label_values({job=\"cadvisor\",__name__=~\"container.*\"},instance)",
         "includeAll": true,
         "label": "Host",
@@ -757,38 +751,46 @@
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "sort": 5,
         "type": "query"
       },
       {
         "allValue": ".*",
         "current": {
-          "text": "All",
-          "value": "$__all"
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
-        "datasource": "feqjruau7xptsc",
-        "definition": "label_values({job=\"cadvisor\",__name__=~\"container.*\", instance=~\"$host\", container!=\"\", image!=\"\"},pod)",
+        "definition": "label_values({job=\"cadvisor\", __name__=~\"container.*\", instance=~\"$host\", container!=\"\", image!=\"\"},pod)",
         "includeAll": true,
         "label": "Container",
+        "multi": true,
         "name": "container",
         "options": [],
         "query": {
-          "query": "label_values({job=\"cadvisor\",__name__=~\"container.*\", instance=~\"$host\", container!=\"\", image!=\"\"},pod)",
-          "refId": "Prometheus-container-Variable-Query"
+          "qryType": 1,
+          "query": "label_values({job=\"cadvisor\", __name__=~\"container.*\", instance=~\"$host\", container!=\"\", image!=\"\"},pod)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
+        "regexApplyTo": "value",
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "Cadvisor exporter",
   "uid": "pMEd7m0Mz",
-  "version": 2
+  "version": 3,
+  "weekStart": ""
 }
