@@ -43,7 +43,7 @@ data:
                         params:
                           - C
                       reducer:
-                        params: []
+                        params: [ ]
                         type: last
                       type: query
                   datasource:
@@ -56,7 +56,9 @@ data:
                   type: threshold
             noDataState: NoData
             execErrState: Error
-            for: 1m
+            for: 5m
+            annotations: { }
+            labels: { }
             isPaused: false
             notification_settings:
               receiver: Email me
@@ -71,7 +73,13 @@ data:
                 datasourceUid: feqjruau7xptsc
                 model:
                   editorMode: code
-                  expr: "max by (container) (rate(container_cpu_usage_seconds_total{job=\"cadvisor\", namespace=\"main\", container!=\"\", container!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)\", image!=\"\"}[1m])) / clamp_min(\n  max by (container) (container_spec_cpu_quota{job=\"cadvisor\", namespace=\"main\", container!=\"\", container!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)\", image!=\"\"})\n  /\n  max by (container) (container_spec_cpu_period{job=\"cadvisor\", namespace=\"main\", container!=\"\", container!~\"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)\", image!=\"\"}),\n  0.001\n)"
+                  expr: |-
+                    max by (container) (rate(container_cpu_usage_seconds_total{job="cadvisor", namespace="main", container!="", container!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)", image!=""}[1m])) / clamp_min(
+                      max by (container) (container_spec_cpu_quota{job="cadvisor", namespace="main", container!="", container!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)", image!=""})
+                      /
+                      max by (container) (container_spec_cpu_period{job="cadvisor", namespace="main", container!="", container!~"(blackbox-exporter|cadvisor|grafana|latticeaxissite|nginx_exporter|prometheus|alloy|loki|POD)", image!=""}),
+                      0.001
+                    )
                   instant: true
                   intervalMs: 1000
                   legendFormat: __auto
@@ -92,7 +100,7 @@ data:
                         params:
                           - C
                       reducer:
-                        params: []
+                        params: [ ]
                         type: last
                       type: query
                   datasource:
@@ -106,8 +114,6 @@ data:
             noDataState: NoData
             execErrState: Error
             for: 1m
-            annotations: {}
-            labels: {}
             isPaused: false
             notification_settings:
               receiver: Email me
@@ -143,7 +149,7 @@ data:
                         params:
                           - C
                       reducer:
-                        params: []
+                        params: [ ]
                         type: last
                       type: query
                   datasource:
@@ -160,7 +166,7 @@ data:
             isPaused: false
             notification_settings:
               receiver: Email me
-
+    
       - orgId: 1
         name: Every minute
         folder: Lattice Axis
@@ -322,7 +328,7 @@ data:
             isPaused: false
             notification_settings:
               receiver: Email Lattice
-
+    
       - orgId: 1
         name: Every minute
         folder: Lambda
@@ -379,6 +385,7 @@ data:
             isPaused: false
             notification_settings:
               receiver: Email Lambda
+
   contact-points.yaml: |-
     apiVersion: 1
 
