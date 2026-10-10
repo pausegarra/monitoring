@@ -298,7 +298,7 @@ data:
           "targets": [
             {
               "editorMode": "code",
-              "expr": "probe_success{instance=\"https://russian-cheatsheet.pausegarra.es/api/q/health/live\"}",
+              "expr": "probe_success{instance=\"https://russiancheatsheet.com/api/q/health/live\"}",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -2642,7 +2642,7 @@ data:
                       "index": 9,
                       "text": "Per Xert passa Despert API"
                     },
-                    "https://russian-cheatsheet.pausegarra.es/api/q/health/live": {
+                    "https://russiancheatsheet.com/api/q/health/live": {
                       "index": 0,
                       "text": "Russian Cheatsheet API"
                     },
