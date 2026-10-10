@@ -57,6 +57,7 @@ data:
         static_configs:
           - targets:
               - https://russiancheatsheet.com/api/q/health/live
+              - https://russiancheatsheet.com/
               - https://perxertpassadespert.pausegarra.com/api/q/health/live
               - https://perxertpassadespert.pausegarra.com/health
               - https://auth.pausegarra.com/health/live

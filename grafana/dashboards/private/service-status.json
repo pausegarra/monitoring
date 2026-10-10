@@ -75,9 +75,17 @@
                   "index": 9,
                   "text": "Per Xert passa Despert API"
                 },
+                "https://perxertpassadespert.pausegarra.es/health": {
+                  "index": 9,
+                  "text": "Per Xert passa Despert Front"
+                },
                 "https://russiancheatsheet.com/api/q/health/live": {
                   "index": 0,
                   "text": "Russian Cheatsheet API"
+                },
+                "https://russiancheatsheet.com/": {
+                  "index": 0,
+                  "text": "Russian Cheatsheet Front"
                 },
                 "https://sendif.pausegarra.es": {
                   "index": 2,
