@@ -56,7 +56,7 @@ data:
           module: [ http_2xx ]
         static_configs:
           - targets:
-              - https://russian-cheatsheet.pausegarra.com/api/q/health/live
+              - https://russiancheatsheet.com/api/q/health/live
               - https://perxertpassadespert.pausegarra.com/api/q/health/live
               - https://perxertpassadespert.pausegarra.com/health
               - https://auth.pausegarra.com/health/live
